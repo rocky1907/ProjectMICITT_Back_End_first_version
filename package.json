@@ -1,0 +1,14 @@
+{
+  "name": "back-end-0.1",
+  "version": "1.0.0",
+  "description": "First version of my backEnd",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rodrigo Alemán Gamboa",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
