@@ -1,8 +1,15 @@
 const express = require('express');
-const users = require('../src/apiServices/users/users');
+const app = express();
+const cors = require('cors');
 
-const router = express.Router();
+// middlewares, hace referencia a algunas funciones que se ejecutan antes de que lleguen a las rutas
+app.use(express.json());
+app.use(express.urlencoded({extends:false}));
+app.use(cors());
 
-router.use('/users', users);
+//definicion de las rutas
+app.use(require('./routes/users'));
 
-module.exports = router;
+
+app.listen(3000);
+console.log("Serve on port 3000");

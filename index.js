@@ -8,7 +8,7 @@ app.use(express.urlencoded({extends:false}));
 app.use(cors());
 
 //definicion de las rutas
-app.use(require('./apiServices/users/Controllers/Routes/users'));
+app.use(require('./src/apiServices/users/routes'));
 
 
 app.listen(3000);

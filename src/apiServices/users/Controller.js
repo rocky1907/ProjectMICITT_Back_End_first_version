@@ -38,7 +38,6 @@ const updateUserById = async(req,res)=>{
     const response = await pool.query('update public."User" set password = $1 where pk_id_user = $2',[password,id]);
     res.json('User Updated successfully: '+response.rows);
 };
-
 module.exports = {
     getUsers,
     createUser,
@@ -46,6 +45,3 @@ module.exports = {
     deleteUserById,
     updateUserById
 }
-//asi se exporta las funciones de uan clase
-
-//Holaaa
