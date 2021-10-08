@@ -7,8 +7,8 @@ app.use(express.json());
 app.use(express.urlencoded({extends:false}));
 app.use(cors());
 
-//definicion de las rutas
-app.use(require('./routes/users'));
+//definicion de las rutas para estimulos
+app.use(require('./routes/stimulus'));
 
 
 app.listen(3000);
