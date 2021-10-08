@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.get('/users',controller.getUsers);
 router.post('/users',controller.createUser);
+router.post('/stimulus',controller.createStimulus);
+router.get('/stimulus',controller.getStimulus);
 router.get('/users/:id',controller.getUserById);
 router.delete('/users/:id',controller.deleteUserById);
 router.put('/users/:id',controller.updateUserById);
