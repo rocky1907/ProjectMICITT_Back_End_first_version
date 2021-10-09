@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/stimulus',controller.getStimulus);
 router.post('/stimulus',controller.createStimulus);
 router.get('/users/:id',controller.getUserById);
-router.delete('/users/:id',controller.deleteUserById);
+router.delete('/stimulus/:id',controller.deleteStimById);
 router.put('/users/:id',controller.updateUserById);
 
 module.exports = router;

@@ -33,10 +33,10 @@ const getUserById = async (req,res)=>{
     res.json(response.rows);
 };
 
-const deleteUserById = async(req,res)=>{
+const deleteStimById = async(req,res)=>{
     const id = req.params.id;
-    const response = await pool.query('delete from public."Stimulus" where pk_id_user = $1',[id]);
-    res.send('User deleted: '+ id);
+    const response = await pool.query('delete from public."Stimulus" where pk_id_stimulus = $1',[id]);
+    res.send('Stimulus deleted: '+ id);
 };
 
 const updateUserById = async(req,res)=>{
@@ -49,6 +49,6 @@ module.exports = {
     getStimulus,
     createStimulus,
     getUserById,
-    deleteUserById,
+    deleteStimById,
     updateUserById
 }
