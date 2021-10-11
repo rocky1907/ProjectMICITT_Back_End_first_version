@@ -7,7 +7,6 @@ function randomNum(){
     return val;
 } 
 
-
 const getStimulus = async (req,res)=>{
     const response = await pool.query('	select * from public."Stimulus";');
     res.status(200).json(response.rows);
@@ -17,8 +16,7 @@ const createStimulus = async (req,res)=>{
     const {description} = req.body;
     console.log(num);
     const response = await pool.query('INSERT INTO public."Stimulus"(pk_id_stimulus, description) VALUES ($1,$2)',[num, description]);
-    //console.log(req.body);
-    //req.body son los datos que una peticion cliente envie
+    
     res.json({
         message: 'Stimulus added Succesfully',
         body:{
