@@ -9,7 +9,7 @@ app.use(cors());
 
 //definicion de las rutas
 
-//app.use(require('./src/apiServices/user/routes'));
+app.use(require('./src/apiServices/user/routes'));
 app.use(require('./src/apiServices/functionary/routes'));
 
 app.listen(3000);

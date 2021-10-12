@@ -5,6 +5,6 @@ const router = express.Router();
 
 //const {getUsers, createUser, getUserById, deleteUser, updateUser} = require('../controllers/users.controller');
 
-router.post('/functionary',controller.addFunctionary);
+router.post('/functionary', controller.addFunctionary);
 
 module.exports = router;

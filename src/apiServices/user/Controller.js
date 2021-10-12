@@ -6,14 +6,14 @@ const addUser = async (req, res)=>{
 
     var id = Math.floor(1000 + Math.random() * 9000)
 
-    const {user_name, password, rol} = req.body;
+    const {user_name, password, roles} = req.body;
 
-    const response = await pool.query('INSERT INTO public."User"(pk_id_num, user_name, password, rol) VALUES ($1,$2,$3,$4)',[id, user_name, password, rol]);
+    const response = await pool.query('INSERT INTO public."User"(pk_id_num, user_name, password, roles) VALUES ($1,$2,$3,$4)',[id, user_name, password, roles]);
   
     res.json({
         message: 'Usuario creado correctamente',
         body:{
-            user:{id, user_name, password, rol}
+            user:{id, user_name, password, roles}
         }
     })
 };
@@ -40,7 +40,7 @@ const updateUserById = async(req,res)=>{
     const id = req.params.id;
     const {password} = req.body;
     const response = await pool.query('update public."User" set password = $1 where pk_id_user = $2',[password,id]);
-    res.json('User Updated successfully: '+response.rows);
+    res.json('User Updated successfully: '+ response.rows);
 };
 */
 //module.exports = {
