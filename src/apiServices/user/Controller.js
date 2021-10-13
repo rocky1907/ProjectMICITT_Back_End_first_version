@@ -20,6 +20,7 @@ const addUser = async (req, res)=>{
 
 
 /*
+se ocupa despues
 const getUsers = async (req,res)=>{
     const response = await pool.query('	select * from public."User";');
     res.status(200).json(response.rows);
