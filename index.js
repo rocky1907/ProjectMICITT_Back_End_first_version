@@ -8,8 +8,8 @@ app.use(express.urlencoded({extends:false}));
 app.use(cors());
 
 //definicion de las rutas
+app.use(require('./src/apiServices/roles/routes', ));
 app.use(require('./src/apiServices/users/routes'));
 
-
-app.listen(3000);
+app.listen(3000)
 console.log("Serve on port 3000");

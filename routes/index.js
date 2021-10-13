@@ -8,6 +8,7 @@ app.use(express.urlencoded({extends:false}));
 app.use(cors());
 
 //definicion de las rutas
+app.use(require('./routes/roles'));
 app.use(require('./routes/users'));
 
 
