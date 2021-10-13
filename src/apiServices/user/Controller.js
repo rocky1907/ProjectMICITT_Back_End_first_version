@@ -4,16 +4,13 @@ const {pool} = require('../../PostgresConecction/PgConecction');
 
 const addUser = async (req, res)=>{
 
-    var id = Math.floor(1000 + Math.random() * 9000)
-
-    const {user_name, password, roles} = req.body;
-
-    const response = await pool.query('INSERT INTO public."User"(pk_id_num, user_name, password, roles) VALUES ($1,$2,$3,$4)',[id, user_name, password, roles]);
+    const {user_id,user_name, password} = req.body;
+    const response = await pool.query('INSERT INTO public."User"(pk_id_num, user_name, password) VALUES ($1,$2,$3)',[user_id, user_name, password]);
   
     res.json({
         message: 'Usuario creado correctamente',
         body:{
-            user:{id, user_name, password, roles}
+            user:{user_id, user_name, password}
         }
     })
 };

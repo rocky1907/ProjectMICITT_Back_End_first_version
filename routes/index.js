@@ -9,6 +9,7 @@ app.use(cors());
 
 //definicion de las rutas
 app.use(require('./routes/users'));
+app.use(require('./routes/role'));
 
 
 app.listen(3000);

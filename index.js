@@ -11,6 +11,7 @@ app.use(cors());
 
 app.use(require('./src/apiServices/user/routes'));
 app.use(require('./src/apiServices/functionary/routes'));
+app.use(require('./src/apiServices/roles/routes'));
 
 app.listen(3000);
 console.log("Serve on port 3000");
