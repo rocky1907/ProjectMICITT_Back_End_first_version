@@ -12,7 +12,10 @@ const addRoles_user = async (req,res)=>{
     });
 }
 const addnew = async(element,user_id)=>{
-    const response = await pool.query('INSERT INTO public."roles_user"(id_user, role_name) VALUES ($1,$2)',[user_id, element]);
+    
+    setTimeout(() => {
+         pool.query('INSERT INTO public."roles_user"(id_user, role_name) VALUES ($1,$2)',[user_id, element]);
+    }, 1000);
 }
 
 module.exports = {
