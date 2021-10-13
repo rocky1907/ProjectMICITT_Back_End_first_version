@@ -21,10 +21,12 @@ const addRole = async (req,res)=>{
 };
 
 const deleteRoleByName = async(req,res)=>{
-    const id = req.params.id;
-    const response = await pool.query('delete from public."Role" where pk_role_name = $1',[id]);
-    res.send('Role deleted: '+ id);
+    const name = req.params.pk_role_name;
+    const response = await pool.query('delete from public."Role" where pk_role_name = $1',[name]);
+    res.send('Role deleted: '+ name);
 };
+
+
 
 module.exports = {
     getRoles,

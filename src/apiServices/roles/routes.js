@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/role',roleController.getRoles);
 router.post('/role',roleController.addRole);
-router.delete('/role/:id',roleController.deleteRoleByName);
+router.delete('/role/:pk_role_name',roleController.deleteRoleByName);
 
 
 module.exports = router;
