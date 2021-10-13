@@ -7,7 +7,7 @@ const getUsers = async (req,res)=>{
     res.status(200).json(response.rows);
 }
 
-const createUser = async (req,res)=>{
+/*const createUser = async (req,res)=>{
     
     const {pk_user_name, password} = req.body;
     console.log(pk_user_name);
@@ -22,13 +22,13 @@ const createUser = async (req,res)=>{
            
         }
     })
-};
+};*/
 
 
 
-const getUserById = async (req,res)=>{
+/*const getUserById = async (req,res)=>{
     const id = req.params.id;
-    const response = await pool.query('select * from public."User" where pk_user_name = $1',[id]);
+    const response = await pool.query('select * from public."User" where pk_id_user = $1',[id]);
     res.json(response.rows);
 };
 
@@ -43,13 +43,13 @@ const updateUserById = async(req,res)=>{
     const {password} = req.body;
     const response = await pool.query('update public."User" set password = $1 where user_name = $2',[password,id]);
     res.json('User Updated successfully: '+response.rows);
-};
+};*/
 
 module.exports = {
     getUsers,
-    createUser,
+    /*createUser,
     getUserById,
     deleteUserById,
-    updateUserById,
+    updateUserById,*/
 
 } 
