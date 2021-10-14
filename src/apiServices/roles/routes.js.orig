@@ -1,9 +1,18 @@
 //const {Router} = require('express');
 const express = require('@awaitjs/express');
-const controller = require('./Controller');
+<<<<<<< HEAD
+const roleController = require('./Roles');
 const router = express.Router();
 
 router.get('/role',roleController.getRoles);
 router.post('/role',roleController.addRole);
 router.delete('/role/:pk_role_name',roleController.deleteRoleByName);
+
+
+=======
+const controller = require('./Controller');
+const router = express.Router();
+router.get('/role', controller.getRoles);
+router.post('/role', controller.addRoles_user);
+>>>>>>> ClaseFuncionario
 module.exports = router;

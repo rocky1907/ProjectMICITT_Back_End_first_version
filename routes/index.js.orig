@@ -7,11 +7,16 @@ app.use(express.json());
 app.use(express.urlencoded({extends:false}));
 app.use(cors());
 
+<<<<<<< HEAD
+//definicion de las rutas para estimulos
+app.use(require('./routes/stimulus'));
+app.use(require('./routes/roles'));
+=======
 //definicion de las rutas
-app.use(require('./src/apiServices/roles/routes', ));
-app.use(require('./src/apiServices/stimulus/routes'));
-app.use(require('./src/apiServices/user/routes'));
-app.use(require('./src/apiServices/functionary/routes'));
-app.listen(3000)
-app.use(require('./src/apiServices/roles/routes'));
+app.use(require('./routes/users'));
+app.use(require('./routes/role'));
+>>>>>>> ClaseFuncionario
+
+
+app.listen(3000);
 console.log("Serve on port 3000");
