@@ -1,7 +1,11 @@
 const { response } = require('express');
 const {pool} = require('../../PostgresConecction/PgConecction');
 
-
+const getUsers = async (req,res)=>{
+    const response = await pool.query('	select * from public."User";');
+    res.status(200).json(response.rows);
+    
+}
 const addUser = async (req, res)=>{
 
     const {user_id,user_name, password} = req.body;
@@ -50,6 +54,7 @@ const updateUserById = async(req,res)=>{
 //}
 
 module.exports = {
-    addUser
+    addUser,
+    getUsers
 
 } 

@@ -9,7 +9,8 @@ app.use(cors());
 
 //definicion de las rutas para estimulos
 app.use(require('./routes/stimulus'));
-app.use(require('./routes/roles'));
+app.use(require('./routes/user'));
+app.use(require('./routes/role'));
 
 
 app.listen(3000);

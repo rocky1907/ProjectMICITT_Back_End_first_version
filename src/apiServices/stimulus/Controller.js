@@ -14,7 +14,6 @@ const getStimulus = async (req,res)=>{
 const createStimulus = async (req,res)=>{
     var num= randomNum();
     const {description} = req.body;
-    console.log(num);
     const response = await pool.query('INSERT INTO public."Stimulus"(pk_id_stimulus, description) VALUES ($1,$2)',[num, description]);
     
     res.json({
