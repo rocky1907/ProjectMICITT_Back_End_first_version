@@ -11,6 +11,7 @@ const getRoles = async (req,res)=>{
  
 const addRole = async (req,res)=>{
     const {pk_role_name}=req.body;
+    console.log(pk_role_name);
     const response = await pool.query('INSERT INTO public."Role"(pk_role_name) VALUES ($1)',[pk_role_name]);
     res.json({
         message: 'Role added Succesfully',
