@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post('/user', controller.addUser);
 router.get('/user', controller.getUsers);
-
+router.put('/user/:id', controller.changePassword);
 //router.get('/user/:id',controller.getUserById);
 //router.delete('/user/:id',controller.deleteUserById);
 //router.put('/user/:id',controller.updateUserById);

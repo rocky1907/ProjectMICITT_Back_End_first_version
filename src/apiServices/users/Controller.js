@@ -20,6 +20,12 @@ const addUser = async (req, res)=>{
     })
 };
 
+const changePassword = async(req, res)=>{
+    const id = req.params.id;
+    const {password} = req.body;
+    const response = await pool.query('UPDATE public."User" set password = $1 where pk_id_num = $2',[password, id]);
+    res.json('User Password Updated successfully: '+ response.rows);
+    };
 
 /*
 se ocupa despues
@@ -55,6 +61,7 @@ const updateUserById = async(req,res)=>{
 
 module.exports = {
     addUser,
-    getUsers
+    getUsers,
+    changePassword
 
 } 
