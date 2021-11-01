@@ -11,6 +11,7 @@ app.use(cors());
 app.use(require('./routes/stimulus'));
 app.use(require('./routes/user'));
 app.use(require('./routes/role'));
+app.use(require('./routes/periods'));
 
 
 app.listen(3000);
