@@ -19,9 +19,9 @@ const addUser = async (req, res)=>{
     })
 };
 
-
-
-
+const getUserByUserName = async (req,res)=>{
+    const user_name = req.params.user_name;
+    const response = await pool.query('select * from public."User" where "user_name" = $1;', [user_name]);
 
 
 
@@ -59,41 +59,21 @@ const changePassword = async(req, res)=>{
     res.json('User Password Updated successfully: '+ response.rows);
     };
 
-/*
-se ocupa despues
-const getUsers = async (req,res)=>{
-    const response = await pool.query('	select * from public."User";');
     res.status(200).json(response.rows);
+    
 }
-    const id = req.params.id;
-    const response = await pool.query('select * from public."User" where pk_id_user = $1',[id]);
-    res.json(response.rows);
-};
 
-const deleteUserById = async(req,res)=>{
-    const id = req.params.id;
-    const response = await pool.query('delete from public."User" where pk_user_name = $1',[id]);
-    res.send('User deleted: '+ id);
-};
-
-const updateUserById = async(req,res)=>{
-    const id = req.params.id;
+const changePasswordName = async(req, res)=>{
+    const user_name = req.params.user_name;
     const {password} = req.body;
-    const response = await pool.query('update public."User" set password = $1 where user_name = $2',[password,id]);
-    res.json('User Updated successfully: '+ response.rows);
-};*/
-
-//module.exports = {
-//    getUsers,
-//    createUser,
-//    getUserById,
-//    deleteUserById,
-//    updateUserById
-//}
+    const response = await pool.query('UPDATE public."User" set password = $1 where user_name = $2',[password, user_name]);
+    res.json('User Password Updated successfully: '+ response.rows);
+  };
 
 module.exports = {
     addUser,
     getUsers,
-    changePassword
-
+    changePassword,
+    changePasswordName,
+    getUserByUserName
 } 
