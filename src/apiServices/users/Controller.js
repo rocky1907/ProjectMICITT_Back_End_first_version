@@ -22,46 +22,15 @@ const addUser = async (req, res)=>{
 const getUserByUserName = async (req,res)=>{
     const user_name = req.params.user_name;
     const response = await pool.query('select * from public."User" where "user_name" = $1;', [user_name]);
+    res.status(200).json(response.rows);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const changePassword = async(req, res)=>{
+const changePasswordById = async(req, res)=>{
     const id = req.params.id;
     const {password} = req.body;
     const response = await pool.query('UPDATE public."User" set password = $1 where pk_id_num = $2',[password, id]);
     res.json('User Password Updated successfully: '+ response.rows);
     };
-
-    res.status(200).json(response.rows);
-    
-}
 
 const changePasswordName = async(req, res)=>{
     const user_name = req.params.user_name;
@@ -73,7 +42,7 @@ const changePasswordName = async(req, res)=>{
 module.exports = {
     addUser,
     getUsers,
-    changePassword,
+    changePasswordById,
     changePasswordName,
     getUserByUserName
 } 
