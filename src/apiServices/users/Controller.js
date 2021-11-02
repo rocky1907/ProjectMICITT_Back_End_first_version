@@ -19,6 +19,39 @@ const addUser = async (req, res)=>{
     })
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const changePassword = async(req, res)=>{
     const id = req.params.id;
     const {password} = req.body;
