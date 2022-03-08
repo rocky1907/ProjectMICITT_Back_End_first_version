@@ -8,5 +8,16 @@ const router = express.Router();
 router.get('/functionary',controller.getFunctionary);
 router.post('/functionary',controller.addFunctionary);
 router.put('/functionary/:id',controller.updateFunById);
+router.get('/functionary/stratums', controller.getOccupationalStratum);
+router.get('/functionary/specialty', controller.getSpecialty);
+router.get('/functionary/condition', controller.getAppointmentCondition);
+router.get('/functionary/family', controller.getFamily);
+router.get('/functionary/classTELECOM', controller.getClassTELECOM);
+router.get('/functionary/classCIT', controller.getClassCIT);
+router.get('/functionary/unitCIT', controller.getUnitCIT);
+router.get('/functionary/unitTELECOM', controller.getUnitTELECOM);
+router.get('/functionary/post', controller.getPost);
+router.get('/functionary/departmentCIT', controller.getDepartmentCIT);
+router.get('/functionary/departmentTELECOM', controller.getDepartmentTELECOM);
 
 module.exports = router;
