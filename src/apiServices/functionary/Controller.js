@@ -20,19 +20,26 @@ const updateFunById = async(req,res)=>{
 };
 
 const addFunctionary = async (req,res)=>{
-  var num = randomNum();
-  const { vice_ministry, deparment, position_number, name_fun, last_name, id_fun, organizational_unit, job_class, specialty, subspecialty, own_specialty, post, residency, appointment_condition, occupational_stratum, family_group, mail, telephone, status} = req.body;
-  const response = await pool.query('INSERT INTO public."Functionary"(pk_id_num,vice_ministry,deparment,position_number,name_fun,last_name,id_fun,organizational_unit,job_class,specialty,subspecialty,own_specialty,post,residency,appointment_condition,occupational_stratum,family_group,mail,telephone,status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20)',[num,vice_ministry,deparment,position_number,name_fun,last_name,id_fun,organizational_unit,job_class,specialty,subspecialty,own_specialty,post,residency,appointment_condition,occupational_stratum,family_group,mail,telephone,status]);
+ 
+  const { pk_id_num, vice_ministry, deparment, position_number, name_fun, last_name, id_fun, organizational_unit, job_class, specialty, subspecialty, own_specialty, post, residency, appointment_condition, occupational_stratum, family_group, mail, telephone, status} = req.body;
+  const response = await pool.query('INSERT INTO public."Functionary"(pk_id_num,vice_ministry,deparment,position_number,name_fun,last_name,id_fun,organizational_unit,job_class,specialty,subspecialty,own_specialty,post,residency,appointment_condition,occupational_stratum,family_group,mail,telephone,status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20)',[pk_id_num,vice_ministry,deparment,position_number,name_fun,last_name,id_fun,organizational_unit,job_class,specialty,subspecialty,own_specialty,post,residency,appointment_condition,occupational_stratum,family_group,mail,telephone,status]);
   //console.log(req.body);
   //req.body son los datos que una peticion cliente envie
   res.json({
       message: 'Functionary added Succesfully',
       body:{
-          user:{num, vice_ministry, deparment, position_number, name_fun, last_name, id_fun, organizational_unit, job_class, specialty, subspecialty, own_specialty, post, residency, appointment_condition, occupational_stratum, family_group, mail, telephone, status}
+          user:{pk_id_num, vice_ministry, deparment, position_number, name_fun, last_name, id_fun, organizational_unit, job_class, specialty, subspecialty, own_specialty, post, residency, appointment_condition, occupational_stratum, family_group, mail, telephone, status}
       }
   })
 };
-       
+
+// const getFunById = async (req,res)=>{
+//   const id_fun = req.params.id_fun;
+//   const response = await pool.query('select pk_id_num from public."Functionary" where "id_fun" = $1;', [id_fun]);
+//   res.status(200).json(response.rows);
+// }
+
+
 const getOccupationalStratum = async (req,res)=>{
   const response = await pool.query('	select * from public."occupational_stratum";');
   res.status(200).json(response.rows);
@@ -103,4 +110,5 @@ module.exports = {
   getPost,
   getDepartmentCIT,
   getDepartmentTELECOM
+  // getFunById
 } 
