@@ -20,5 +20,6 @@ router.get('/functionary/unitTELECOM', controller.getUnitTELECOM);
 router.get('/functionary/post', controller.getPost);
 router.get('/functionary/departmentCIT', controller.getDepartmentCIT);
 router.get('/functionary/departmentTELECOM', controller.getDepartmentTELECOM);
+router.get('/functionary/:id_fun', controller.getPkIDByIdFun);
 
 module.exports = router;

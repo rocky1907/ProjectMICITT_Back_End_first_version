@@ -32,12 +32,12 @@ const changePasswordById = async(req, res)=>{
     res.json('User Password Updated successfully: '+ response.rows);
     };
 
-// const changeUserNameById = async(req, res)=>{
-//     const id = req.params.id;
-//     const {user_name} = req.body;
-//     const response = await pool.query('UPDATE public."User" set user_name = $1 where pk_id_num = $2',[user_name, id]);
-//     res.json('User User Name Updated successfully: '+ response.rows);
-//     };    
+const changeUserNameById = async(req, res)=>{
+    const id = req.params.id;
+    const {user_name} = req.body;
+    const response = await pool.query('UPDATE public."User" set user_name = $1 where pk_id_num = $2',[user_name, id]);
+    res.json('User Name Updated successfully: '+ response.rows);
+};    
 
 const changePasswordName = async(req, res)=>{
     const user_name = req.params.user_name;
@@ -51,7 +51,7 @@ module.exports = {
     getUsers,
     changePasswordById,
     changePasswordName,
-    getUserByUserName
-    // changeUserNameById
+    getUserByUserName,
+    changeUserNameById
 
 } 

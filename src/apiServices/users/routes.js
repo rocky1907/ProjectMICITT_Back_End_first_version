@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/user', controller.addUser);
 router.get('/user', controller.getUsers);
 router.put('/user/:id', controller.changePasswordById);
-// router.put('/user/user_name/:id', controller.changeUserNameById);
+router.put('/user/user_name/:id', controller.changeUserNameById);
 router.put('/user/password/:user_name', controller.changePasswordName);
 router.get('/user/:user_name', controller.getUserByUserName);
 
