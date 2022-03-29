@@ -35,9 +35,15 @@ const deleteRoleByName = async(req,res)=>{
     res.send('Role deleted: '+ name);
 };
 
+const getRoleBoss = async (req,res)=>{
+    const response = await pool.query('select * from public."roles_user" where role_name = \'Jefe Superior\';');
+    res.status(200).json(response.rows);
+}
+
 module.exports = {
     getRoles,
     addRoles_user,
     deleteRoleByName,
-    addRole
+    addRole,
+    getRoleBoss
 }
