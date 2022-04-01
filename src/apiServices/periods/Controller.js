@@ -24,7 +24,14 @@ const addPeriod = async (req,res)=>{
 
 };
 
+const getPeriodByName = async (req,res)=>{
+    const pk_period_name = req.params.pk_period_name;
+    const response = await pool.query('select * from public."Period" where "pk_period_name" = $1;', [pk_period_name]);
+    res.status(200).json(response.rows);
+  }
+
 module.exports = {
     getPeriods,
-    addPeriod
+    addPeriod,
+    getPeriodByName
 }

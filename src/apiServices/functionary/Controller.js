@@ -99,7 +99,11 @@ const getFunctionaryByPkID = async (req,res)=>{
   const response = await pool.query('select * from public."Functionary" where "pk_id_num" = $1;', [pk_id_num]);
   res.status(200).json(response.rows);
 }
-
+const getFunctionaryByID = async (req,res)=>{
+  const id_fun = req.params.id_fun;
+  const response = await pool.query('select * from public."Functionary" where "id_fun" = $1;', [id_fun]);
+  res.status(200).json(response.rows);
+}
 module.exports = {
   getFunctionary,
   addFunctionary,
@@ -116,5 +120,6 @@ module.exports = {
   getDepartmentCIT,
   getDepartmentTELECOM,
   getPkIDByIdFun,
-  getFunctionaryByPkID
+  getFunctionaryByPkID,
+  getFunctionaryByID
 } 
