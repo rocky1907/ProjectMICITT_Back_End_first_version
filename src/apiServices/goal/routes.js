@@ -5,7 +5,9 @@ const router = express.Router();
 
 router.get('/goal', controller.getGoal);
 router.post('/goal', controller.createGoal);
-router.post('/agreeGoal', controller.addAgreement_goal);
-router.get('/agreeGoal', controller.getAgreement_goal);
+router.put('/goalUpd/:id',controller.updateGoal);
+router.delete('/goalAgree/:id',controller.deleteGoalByIdAgree);
+router.get('/goalAgree/:id', controller.getGoalsById);
+router.delete('/goal/:id',controller.deleteGoalByPkId);
 
 module.exports = router;

@@ -18,9 +18,23 @@ const createAgreement = async (req,res)=>{
     })
 };
 
+const updateAgreement = async(req,res)=>{
+    const id = req.params.id;
+    const {id_fun,name_fun,classs,department,post,adress,year_ev,name_boss,name_period,first_date,date_eva_first,final_date,date_eva_final,stim} = req.body;
+    const response = await pool.query('UPDATE public."Agreement" set id_fun = $1 , name_fun = $2 , classs = $3 , department = $4 , post = $5, adress = $6, year_ev = $7 , name_boss = $8 , name_period = $9 , first_date = $10 , date_eva_first = $11 , final_date = $12 , date_eva_final = $13 , stim = $14 where pk_id_num = $15',[id_fun,name_fun,classs,department,post,adress,year_ev,name_boss,name_period,first_date,date_eva_first,final_date,date_eva_final,stim, id]);
+    res.json('Agreement Updated successfully: '+response.rows);
+  };
+
+  const deleteAgreementById = async(req,res)=>{
+    const id = req.params.id;
+    const response = await pool.query('delete from public."Agreement" where pk_id_num = $1',[id]);
+    res.send('Agreement deleted: '+ id);
+};
 
 module.exports = {
     getAgreement,
     createAgreement,
+    updateAgreement,
+    deleteAgreementById
     
 }
