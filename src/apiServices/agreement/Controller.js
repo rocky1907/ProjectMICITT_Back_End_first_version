@@ -6,6 +6,11 @@ const getAgreement = async (req,res)=>{
     const response = await pool.query('	select * from public."Agreement";');
     res.status(200).json(response.rows);
 }
+const getAgreementByIdFun = async (req,res)=>{
+    const id_fun = req.params.id_fun;
+    const response = await pool.query('	select * from public."Agreement" where id_fun =$1;', [id_fun]);
+    res.status(200).json(response.rows);
+}
 const createAgreement = async (req,res)=>{
     const {pk_id_num, id_fun,name_fun,classs,department,post,adress,year_ev,name_boss,name_period,first_date,date_eva_first,final_date,date_eva_final,stim} = req.body;
     const response = await pool.query('INSERT INTO public."Agreement"(pk_id_num, id_fun,name_fun,classs,department,post,adress,year_ev,name_boss,name_period,first_date,date_eva_first,final_date,date_eva_final,stim) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)',[pk_id_num, id_fun,name_fun,classs,department,post,adress,year_ev,name_boss,name_period,first_date,date_eva_first,final_date,date_eva_final,stim]);
@@ -35,6 +40,7 @@ module.exports = {
     getAgreement,
     createAgreement,
     updateAgreement,
-    deleteAgreementById
+    deleteAgreementById,
+    getAgreementByIdFun
     
 }
