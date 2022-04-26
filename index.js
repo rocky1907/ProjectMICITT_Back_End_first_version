@@ -14,5 +14,7 @@ app.use(require('./src/apiServices/functionary/routes'));
 app.use(require('./src/apiServices/roles/routes'));
 app.use(require('./src/apiServices/periods/routes'));
 app.use(require('./src/apiServices/evalutions/alta-direccion-publica/routes'));
+app.use(require('./src/apiServices/agreement/routes'));
+app.use(require('./src/apiServices/goal/routes'));
 app.listen(3000);
 console.log("Serve on port 3000");
