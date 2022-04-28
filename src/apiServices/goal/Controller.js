@@ -21,7 +21,7 @@ const createGoal = async (req,res)=>{
 const updateGoal = async(req,res)=>{
     const id = req.params.id;
     const {objective,indicator1,product,percentage,agreeddate,followdate,observations} = req.body;
-    const response = await pool.query('UPDATE public."Goal" set objective = $1 , indicator1 = $2 , product = $3 , percentage = $4 , agreeddate = $5, followdate = $6, observations = $7 where id_agreement = $8',[objective,indicator1,product,percentage,agreeddate,followdate,observations, id]);
+    const response = await pool.query('UPDATE public."Goal" set objective = $1 , indicator1 = $2 , product = $3 , percentage = $4 , agreeddate = $5, followdate = $6, observations = $7 where pk_id_num = $8',[objective,indicator1,product,percentage,agreeddate,followdate,observations, id]);
     res.json('Goal Updated successfully: '+response.rows);
   };
   

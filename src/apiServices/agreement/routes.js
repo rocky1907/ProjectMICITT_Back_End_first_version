@@ -10,5 +10,6 @@ router.get('/agreement/:id_fun',controller.getAgreementByIdFun);
 router.post('/agreement',controller.createAgreement);
 router.put('/agreementUpd/:id',controller.updateAgreement);
 router.delete('/agreement/:id',controller.deleteAgreementById);
+router.get('/agreement/:name',controller.getAgreementByNameBoss);
 
 module.exports = router;
