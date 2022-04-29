@@ -36,11 +36,18 @@ const updateAgreement = async(req,res)=>{
     res.send('Agreement deleted: '+ id);
 };
 
+const getAgreementByNameBoss = async (req,res)=>{
+    const name = req.params.name;
+    const response = await pool.query('	select * from public."Agreement" where name_boss =$1;', [name]);
+    res.status(200).json(response.rows);
+}
+
 module.exports = {
     getAgreement,
     createAgreement,
     updateAgreement,
     deleteAgreementById,
-    getAgreementByIdFun
+    getAgreementByIdFun,
+    getAgreementByNameBoss
     
 }

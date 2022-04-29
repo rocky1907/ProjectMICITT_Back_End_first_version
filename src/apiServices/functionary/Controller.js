@@ -95,8 +95,8 @@ const getPkIDByIdFun = async (req,res)=>{
 }
 
 const getFunctionaryByPkID = async (req,res)=>{
-  const pk_id_num = req.params.pk_id_num;
-  const response = await pool.query('select * from public."Functionary" where "pk_id_num" = $1;', [pk_id_num]);
+  const id = req.params.id;
+  const response = await pool.query('select * from public."Functionary" where "pk_id_num" = $1;', [id]);
   res.status(200).json(response.rows);
 }
 const getFunctionaryByID = async (req,res)=>{
