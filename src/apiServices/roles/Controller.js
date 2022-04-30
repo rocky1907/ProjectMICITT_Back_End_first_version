@@ -40,10 +40,25 @@ const getRoleBoss = async (req,res)=>{
     res.status(200).json(response.rows);
 }
 
+const deleteRoleFun = async(req,res)=>{
+    const user = req.params.id;
+    const name = req.params.role_name;
+    const response = await pool.query('delete from public."roles_user" where id_user = $1 and role_name = $2',[user, name]);
+    res.status(200).json(response.rows);
+};
+
+const getRoleFunId = async(req,res)=>{
+    const id = req.params.id;
+    const response = await pool.query('select * from public."roles_user" where id_user = $1',[id]);
+    res.status(200).json(response.rows);
+};
+
 module.exports = {
     getRoles,
     addRoles_user,
     deleteRoleByName,
     addRole,
-    getRoleBoss
+    getRoleBoss,
+    getRoleFunId,
+    deleteRoleFun
 }
