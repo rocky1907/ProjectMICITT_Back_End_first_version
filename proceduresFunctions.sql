@@ -1,5 +1,6 @@
 --dropeo de tablas
 drop table "Period" cascade;
+drop table "Evaluation" cascade;
 drop table "Period_Funcionarity" cascade
 --seteo del formato de las fechas
 SET DATESTYLE TO 'Postgres';
@@ -13,6 +14,12 @@ drop sequence sec_TELECOM_factors;
 
 select * from "Period";
 select * from "Period_Funcionarity";
+
+create table "Evaluation"(
+	id_fun varchar(300) not null,
+	periodo varchar(20),
+	status varchar(100)
+)
 
 select pk_period_name,status,beginning,end_ from public."Period";
 /*Logica de la creacion de Periodos*/
@@ -97,11 +104,17 @@ begin
 			RAISE NOTICE '% No existe un periodo con ese nombre', new.copy_of;
 		else
 			V_aux := return_name_period_copy(new.copy_of);
+			insert into "Evaluation" (id_fun) select id_fun from "Period_Funcionarity" where pk_period_name = V_aux;
+			update "Evaluation" set status = 'Pendiente', periodo = new.pk_period_name WHERE periodo IS NULL;
+			
 			insert into "Period_Funcionarity" (id_fun) select id_fun from "Period_Funcionarity" where pk_period_name = V_aux;
 			UPDATE "Period_Funcionarity" SET pk_period_name = new.pk_period_name WHERE pk_period_name IS NULL;
 		end if;
 		else 
 			V_aux := new.pk_period_name;
+			insert into "Evaluation" (id_fun) select id_fun from "Functionary";
+			update "Evaluation" set status = 'Pendiente', periodo = new.pk_period_name WHERE periodo IS  NULL;
+			
 			insert into "Period_Funcionarity" (id_fun) select id_fun from "Functionary";
 			UPDATE "Period_Funcionarity" SET pk_period_name = V_aux WHERE pk_period_name IS  NULL;
 	end if;
@@ -125,7 +138,7 @@ on "Period" for each row
 execute procedure assign_status();
 
 insert into "Period"(pk_period_name, beginning, end_, cycle_start, end_of_cycle, percentage_indicators, percentage_components, created_by)
-values ('Periodo 2025','2025-10-04','2025-10-10','2025-10-04','2025-10-13',20,80,'Una test');
+values ('Periodo 2022','2022-10-04','2022-10-10','2022-10-04','2022-10-13',20,80,'Una test');
 
 insert into public."Period"(pk_period_name, beginning, end_, cycle_start, end_of_cycle, percentage_indicators,percentage_components, created_by,copy_of)
 VALUES ('Periodo 2026','2026-10-04','2026-10-10','2026-10-04','2026-10-20',20,80,'Una test','Periodo 2025');
@@ -419,6 +432,8 @@ select * from "BossSkill_3";
 select * from "levelOfDevelopment";
 select * from "evaluationIndividualSkills";
 
+
+
 create table "professionalSkills-weighted_3"(
 	firstLevel decimal not null,
 	secondLevel decimal not null,
@@ -510,4 +525,6 @@ insert into "BossSkill_3" values ('Estrategias de empatía y claridad comunicati
 insert into "BossSkill_3" values ('Promover ambiente de respeto antes situaciones de conflicto','Manejo y resolución de conflictos'),
 ('Búsqueda de soluciones','Manejo y resolución de conflictos'),
 ('Control y manejo emocional','Manejo y resolución de conflictos');
+
+
 
