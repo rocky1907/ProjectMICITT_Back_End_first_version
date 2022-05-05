@@ -87,6 +87,32 @@ const addCompetencies = async (req,res)=>{
     })
 };
 
+const addOrUpdate = async (req,res)=>{
+    const { id_fun, periodname, totalindividualskills,percentageindividualskills,totalindividualskillsboss,percentageindividualskillsboss} = req.body;
+    const response = await pool.query('select existEvaluationIndividualSkills($1,$2);',[id_fun,periodname]);
+    var x = response.rows[0].existevaluationindividualskills;
+    if(totalindividualskills==null && percentageindividualskills==null){
+        if(x===true){
+            //insert Jefe
+            const response = await pool.query('INSERT INTO public."evaluationIndividualSkills"(id_fun, periodname, totalindividualskillsboss, percentageindividualskillsboss) VALUES ($1, $2, $3, $4);',[id_fun,periodname,totalindividualskillsboss,percentageindividualskillsboss]);
+            res.status(200).json(response.rows);
+        }else{
+            //update Jefe
+            const response = await pool.query('UPDATE public."evaluationIndividualSkills" SET totalindividualskillsboss = $1, percentageindividualskillsboss= $2 WHERE id_fun=$3;',[totalindividualskillsboss,percentageindividualskillsboss,id_fun]);
+            res.status(200).json(response.rows);
+        }
+    }else{
+        if(x===true){
+            //insert Funcionario
+            const response = await pool.query('INSERT INTO public."evaluationIndividualSkills"(id_fun, periodname, totalindividualskills, percentageindividualskills) VALUES ($1, $2, $3, $4);',[id_fun,periodname,totalindividualskills,percentageindividualskills]);
+            res.status(200).json(response.rows);
+        }else{
+            //update Funcionario
+            const response = await pool.query('UPDATE public."evaluationIndividualSkills" SET totalindividualskills = $1, percentageindividualskills= $2 WHERE id_fun=$3;',[totalindividualskills,percentageindividualskills,id_fun]);
+            res.status(200).json(response.rows);
+        }
+    }
+};
 const updateAutoCompetenciesId = async(req,res)=>{
     const id = req.params.id;
     const {item1_auto,
@@ -292,6 +318,7 @@ module.exports = {
     updateAutoCompetenciesId,
     updateChiefCompetenciesId,
     getPendingEv,
-    getPendingEvs
+    getPendingEvs,
+    addOrUpdate
 
 }
