@@ -104,6 +104,13 @@ const getFunctionaryByID = async (req,res)=>{
   const response = await pool.query('select * from public."Functionary" where "id_fun" = $1;', [id_fun]);
   res.status(200).json(response.rows);
 }
+const getFunctionaryByIdBoss = async (req,res)=>{
+  const id = req.params.id;
+  const response = await pool.query('select * from public."Functionary" where "boss" = $1;', [id]);
+  res.status(200).json(response.rows);
+}
+
+
 module.exports = {
   getFunctionary,
   addFunctionary,
@@ -121,5 +128,6 @@ module.exports = {
   getDepartmentTELECOM,
   getPkIDByIdFun,
   getFunctionaryByPkID,
-  getFunctionaryByID
+  getFunctionaryByID,
+  getFunctionaryByIdBoss
 } 

@@ -22,6 +22,7 @@ router.get('/functionary/departmentTELECOM', controller.getDepartmentTELECOM);
 router.get('/functionary/:id_fun', controller.getPkIDByIdFun);
 router.get('/functionary/boss/:id', controller.getFunctionaryByPkID);
 router.get('/functionary/idFun/:id_fun', controller.getFunctionaryByID);
+router.get('/functionary/idBoss/:id', controller.getFunctionaryByIdBoss);
 
 
 module.exports = router;
