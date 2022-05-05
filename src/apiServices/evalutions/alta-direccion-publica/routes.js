@@ -12,5 +12,6 @@ router.put('/alta-direccion-publica/competencies/chief/:id',controller.updateChi
 router.get('/evaluations',controller.getPendingEv);
 router.get('/evaluations/:pk_id_num',controller.getPendingEvs);
 router.post('/alta-direccion-publica/competencies',controller.addCompetencies);
+router.post('/alta-direccion-publica/competencies/addorupdate',controller.addOrUpdate);
 //router.post('/periods',controller.addPeriod);
 module.exports = router;
