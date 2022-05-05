@@ -319,6 +319,7 @@ module.exports = {
     updateChiefCompetenciesId,
     getPendingEv,
     getPendingEvs,
-    addOrUpdate
+    addOrUpdate,
+    getEvaTotals80
 
 }
