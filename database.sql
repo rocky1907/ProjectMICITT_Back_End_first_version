@@ -559,6 +559,22 @@ V_id varchar(30);
 end;
 $$ LANGUAGE plpgsql;
 select return_name_period_copy ('Periodo 2075');
+
+select * from "Period";
+CREATE FUNCTION showPeriod_by_Period_name(P_period_name varchar)
+RETURNS SETOF "Period" AS
+$BODY$
+DECLARE
+    reg RECORD;
+BEGIN
+    FOR REG IN SELECT * FROM "Period" where pk_period_name = P_period_name LOOP
+       RETURN NEXT reg;
+    END LOOP;
+    RETURN;
+END
+$BODY$ LANGUAGE 'plpgsql'
+select * from showPeriod_by_Period_name('Petriodo 2025');
+
 --creacion de secuencias
 /*CREATE SEQUENCE order_TELECOM_factors
 START 1

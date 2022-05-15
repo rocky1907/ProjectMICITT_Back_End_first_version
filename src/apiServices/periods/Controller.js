@@ -26,8 +26,15 @@ const addPeriod = async (req,res)=>{
 
 const getPeriodByName = async (req,res)=>{
     const pk_period_name = req.params.pk_period_name;
-    const response = await pool.query('select * from public."Period" where "pk_period_name" = $1;', [pk_period_name]);
-    res.status(200).json(response.rows);
+    const response = await pool.query('select * from showPeriod_by_Period_name($1);', [pk_period_name]);
+    if(response.rows.length != 0){
+        res.status(200).json(response.rows);
+    }else{
+        res.status(400).json({
+            message: 'No se encontró el periodo',
+        });
+    }
+    
   }
 
 module.exports = {
