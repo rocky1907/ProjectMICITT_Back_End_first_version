@@ -15,6 +15,7 @@ select * from "roles_user";
 
 
 delete from "User";
+delete from "roles_user";
 delete from "Functionary";
 
 create table "Role" (pk_role_name varchar(50) primary key);
@@ -121,9 +122,9 @@ insert into "Role" values ('Evaluador');
 insert into "Role" values ('Jefe Superior');		
 insert into "Role" values ('Administrador');		
 		
-insert into "roles_user" values(1111,'Funcionario');
+/*insert into "roles_user" values(1111,'Funcionario');
 insert into "roles_user" values(1111,'Supervisor Recursos Humanos');
-insert into "roles_user" values(2222,'Funcionario');
+insert into "roles_user" values(2222,'Funcionario');*/
 
 insert into "department_CIT_Boss" values (097540,'Despacho Ministerial');
 insert into "department_TELECOM_Boss" values (356259,'Departamento de Políticas Públicas de Telecomunicaciones');
@@ -363,11 +364,13 @@ insert into "department_CIT" values('Unidad de Servicios Tecnológicos');
 insert into "department_CIT" values('Viceministro de Ciencia, Innovación y Tecnológía');
 
 select * from "Agreement";
-
+select * from "Evaluation";
+select * from "Goal";
 /*Cambios Brit*/
 
 drop table "Goal" cascade;
 drop table "Agreement" cascade;
+drop table "Evaluation" cascade;
 
 create table "Agreement" (
 pk_id_num NUMERIC(10) primary key,
@@ -422,10 +425,10 @@ totalspercentage NUMERIC(10) not null
 );
 
 create table "Evaluation"(
-pk_id_num NUMERIC(10) primary key,
 id_fun varchar(300) not null,
-periodo varchar(20) not null
-);
+periodo varchar(20),
+status varchar(100)
+)
 
 create or replace function insertGoalsAndEvaluations() returns trigger as $insertGoalsAndEvaluations$
 declare
@@ -915,6 +918,8 @@ select * from "BossSkill_3";
 select * from "levelOfDevelopment";
 select * from "evaluationIndividualSkills";
 select * from "rubricEvaluation";
+
+insert into "Evaluation" values ('3-0456-0292', 'Periodo 2021', 'Validado');
 
 create table "professionalSkills-weighted_3"(
 	firstLevel decimal not null,
