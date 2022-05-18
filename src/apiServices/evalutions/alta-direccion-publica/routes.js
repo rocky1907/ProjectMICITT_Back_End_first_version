@@ -20,6 +20,8 @@ router.put('/alta-direccion-publica/goalsEva80/:id', controller.updateGoalEvalua
 router.delete('/alta-direccion-publica/goals80/:id', controller.deleteGoalEvaById);
 router.post('/alta-direccion-publica/goalsTotal', controller.addEvaluation80Totals);
 router.get('/alta-direccion-publica/goalsTotal', controller.getEvaTotals80);
+router.get('/alta-direccion-publica/percentage80/:id/:per', controller.getTotals80);
+router.get('/alta-direccion-publica/percentage20/:id/:per', controller.getTotals20);
 
 router.post('/alta-direccion-publica/competencies',controller.addCompetencies);
 router.post('/alta-direccion-publica/competencies/addorupdate',controller.addOrUpdate);

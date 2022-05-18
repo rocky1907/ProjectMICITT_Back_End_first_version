@@ -265,7 +265,6 @@ const getPendingEvs = async (req,res)=>{
     res.status(200).json(response.rows);
 }
 
-
 const getGoalsResults80 = async (req,res)=>{
     const response = await pool.query('select * from public."goalsEvaluation80";');
     res.status(200).json(response.rows);
@@ -300,6 +299,21 @@ const getEvaTotals80 = async (req,res)=>{
     res.status(200).json(response.rows);
 }
 
+const getTotals80 = async (req,res)=>{
+    const id = req.params.id;
+    const per = req.params.per;
+    const response = await pool.query('select * from public."Evaluation80Totals" where id_fun = $1 and periodo = $2;', [id, per]);
+    res.status(200).json(response.rows);
+}
+
+const getTotals20 = async (req,res)=>{
+    const id = req.params.id;
+    const per = req.params.per;
+    const response = await pool.query('select * from public."evaluationIndividualSkills" where id_fun = $1 and periodname = $2;', [id, per]);
+    res.status(200).json(response.rows);
+}
+
+
 module.exports = {
     getDescriptions,
     getProfessionalSkills,
@@ -320,6 +334,8 @@ module.exports = {
     getPendingEv,
     getPendingEvs,
     addOrUpdate,
-    getEvaTotals80
+    getEvaTotals80,
+    getTotals80,
+    getTotals20
 
 }
