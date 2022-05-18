@@ -1008,7 +1008,41 @@ insert into "BossSkill_3" values ('Promover ambiente de respeto antes situacione
 ('Búsqueda de soluciones','Manejo y resolución de conflictos'),
 ('Control y manejo emocional','Manejo y resolución de conflictos');
 
+/*Nuevo*/
 
+create or replace function find_user(Pid_user numeric) returns boolean as $$
+declare
+v_pk numeric;
+v_user varchar;
+v_password varchar;
+Begin
+v_pk:=0;
+v_user:='null';
+v_password:='null';
+select pk_id_num,user_name,password into v_pk,v_user,v_password from "User" where pk_id_num=Pid_user;
+if v_pk =0 or v_pk is null and v_user ='null' or v_user is null and v_password ='null' or v_password is null then
+return false;
+else 
+return true;
+end if;
+end;
+$$ LANGUAGE plpgsql;
+select  find_user(1111);
 
+create or replace function existEvaluationIndividualSkills(P_id_fun varchar,
+P_period varchar) returns boolean as $$
+declare
+v_id VARCHAR(20);
+v_period VARCHAR(20);
+Begin
+v_id:='null';
+v_period:='null';
+select id_fun, periodname into v_id, v_period from "evaluationIndividualSkills" where id_fun=P_id_fun and periodname=P_period;
+if v_id is null or v_id='null' and v_period is null or v_period='null' then
+return true;
+else return false;
+end if;
+end;
+$$ language plpgsql;
 
 
