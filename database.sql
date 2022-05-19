@@ -26,7 +26,7 @@ create table roles_user(
 create table "User" (
 	pk_id_num NUMERIC(10) primary key,
 	user_name varchar(50) not null, 
-	password varchar(50) not null
+	password varchar(80) not null
 );
 create table "Stimulus" (
 	pk_id_stimulus serial primary key,
@@ -101,6 +101,9 @@ insert into "roles_user" values(2222,'Funcionario');
 insert into "roles_user" values(8767,'Jefe Superior');
 
 INSERT INTO "User" VALUES (1111, 'marylin.masis.gonzalez', 'Micitt_465');
+INSERT INTO "User" VALUES (2304, 'monica.ramirez.cruz', 'Micitt_254');
+INSERT INTO "User" VALUES (8146, 'yendry.rojas.araya', 'Micitt_104');
+INSERT INTO "User" VALUES (8206, 'maría.grossi.castillo', 'Micitt_786');
 
 INSERT INTO "User" VALUES (2222, 'esteban.monge.cordero', 'Micitt_561');
 
@@ -1012,15 +1015,15 @@ insert into "BossSkill_3" values ('Promover ambiente de respeto antes situacione
 
 create or replace function find_user(Pid_user numeric) returns boolean as $$
 declare
-v_pk numeric;
-v_user varchar;
-v_password varchar;
+V_pk numeric;
+V_user varchar;
+
 Begin
-v_pk:=0;
-v_user:='null';
-v_password:='null';
-select pk_id_num,user_name,password into v_pk,v_user,v_password from "User" where pk_id_num=Pid_user;
-if v_pk =0 or v_pk is null and v_user ='null' or v_user is null and v_password ='null' or v_password is null then
+V_pk:=0;
+V_user:='null';
+
+select "pk_id_num","user_name" into v_pk,v_user from User where pk_id_num=Pid_user;
+if V_pk =0 or V_pk is null and V_user ='null' or V_user is null then
 return false;
 else 
 return true;
@@ -1028,21 +1031,8 @@ end if;
 end;
 $$ LANGUAGE plpgsql;
 select  find_user(1111);
+SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_NAME = 'public.User';
 
-create or replace function existEvaluationIndividualSkills(P_id_fun varchar,
-P_period varchar) returns boolean as $$
-declare
-v_id VARCHAR(20);
-v_period VARCHAR(20);
-Begin
-v_id:='null';
-v_period:='null';
-select id_fun, periodname into v_id, v_period from "evaluationIndividualSkills" where id_fun=P_id_fun and periodname=P_period;
-if v_id is null or v_id='null' and v_period is null or v_period='null' then
-return true;
-else return false;
-end if;
-end;
-$$ language plpgsql;
+
 
 

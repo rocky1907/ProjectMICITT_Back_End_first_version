@@ -30,7 +30,7 @@ const addUser = async (req, res)=>{
         return res.status(201).json({
             ok: true,
             uid: pk_id_num,
-            user_name,
+            name:user_name,
             token
         });
     

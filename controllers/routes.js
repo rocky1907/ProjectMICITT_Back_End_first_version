@@ -13,6 +13,6 @@ router.post('/login',[
 ],controller.loginUsuario); 
 
 //Validar token 
-//router.get('/renew',validarJWT, validarToken); 
+router.get('/renew',validarJWT, controller.validarToken); 
 
 module.exports= router;
