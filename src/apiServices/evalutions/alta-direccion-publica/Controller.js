@@ -313,6 +313,40 @@ const getTotals20 = async (req,res)=>{
     res.status(200).json(response.rows);
 }
 
+const updateEvaluation = async(req,res)=>{
+    const id = req.params.id;
+    const per = req.params.per;
+    const {id_fun, periodo, status, statussign, evidence, observationsboss, observationseva, status80, status20, observationsstatus, interview} = req.body;
+    const response = await pool.query('UPDATE public."Evaluation" set id_fun = $1 , periodo = $2 , status = $3 , statussign = $4 , evidence = $5, observationsboss = $6, observationseva = $7, status80 = $8 , status20 = $9 , observationsstatus = $10, interview = $11 where id_fun = $12 and periodo = $13',[id_fun, periodo, status, statussign, evidence, observationsboss, observationseva, status80, status20, observationsstatus, interview, id, per]);
+    res.json('Evaluation Updated successfully: '+response.rows);
+  };
+
+  const getEvaluation= async (req,res)=>{
+    const id = req.params.id;
+    const per = req.params.per;
+    const response = await pool.query('select * from public."Evaluation" where id_fun = $1 and periodo = $2;', [id, per]);
+    res.status(200).json(response.rows);
+}
+
+const getActions = async (req,res)=>{
+    const id = req.params.id;
+    const per = req.params.per;
+    const response = await pool.query('select * from public."Action" where id_fun = $1 and periodo = $2;', [id, per]);
+    res.status(200).json(response.rows);
+}
+
+const addAction = async (req,res)=>{
+    const {id_fun, periodo, aspects, actions, responsable, term} = req.body;
+    const response = await pool.query('INSERT INTO public."Action"(id_fun, periodo, aspects, actions, responsable, term) VALUES ($1,$2,$3,$4,$5,$6)',[id_fun, periodo, aspects, actions, responsable, term]);
+    
+    res.json({
+        message: 'Action added Succesfully',
+        body:{
+            Evaluation80Totals:{id_fun, periodo, aspects, actions, responsable, term}
+        }
+    })
+};
+
 
 module.exports = {
     getDescriptions,
@@ -336,6 +370,10 @@ module.exports = {
     addOrUpdate,
     getEvaTotals80,
     getTotals80,
-    getTotals20
+    getTotals20,
+    updateEvaluation,
+    getEvaluation,
+    getActions,
+    addAction
 
 }

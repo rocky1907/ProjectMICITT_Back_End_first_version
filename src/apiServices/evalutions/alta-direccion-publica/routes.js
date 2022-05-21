@@ -12,6 +12,7 @@ router.get('/evaluationsValiFun/:id',controller.getEvaValFun);
 router.put('/alta-direccion-publica/competencies/functionary/:id',controller.updateAutoCompetenciesId);
 router.put('/alta-direccion-publica/competencies/chief/:id',controller.updateChiefCompetenciesId);
 router.get('/evaluations',controller.getPendingEv);
+router.put('/evaluations/:id/:per',controller.updateEvaluation);
 router.get('/evaluations/:pk_id_num',controller.getPendingEvs);
 router.post('/alta-direccion-publica/goals80', controller.addGoalsResults80);
 router.get('/alta-direccion-publica/goals80', controller.getGoalsResults80);
@@ -22,8 +23,12 @@ router.post('/alta-direccion-publica/goalsTotal', controller.addEvaluation80Tota
 router.get('/alta-direccion-publica/goalsTotal', controller.getEvaTotals80);
 router.get('/alta-direccion-publica/percentage80/:id/:per', controller.getTotals80);
 router.get('/alta-direccion-publica/percentage20/:id/:per', controller.getTotals20);
-
 router.post('/alta-direccion-publica/competencies',controller.addCompetencies);
 router.post('/alta-direccion-publica/competencies/addorupdate',controller.addOrUpdate);
+
+router.get('/evaluation/:id/:per',controller.getEvaluation);
+router.get('/evaluation/action/:id/:per', controller.getActions);
+router.post('/evaluation/action/', controller.addAction);
+
 //router.post('/periods',controller.addPeriod);
 module.exports = router;

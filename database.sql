@@ -6,6 +6,8 @@ drop table "Stimulus" cascade;
 drop table "job_class_CIT" cascade;
 drop table "job_class_TELECOM" cascade;
 drop table "Department_Boss" cascade;
+drop table "Period" cascade;
+drop table "Evaluation" cascade;
 
 select * from "Functionary";
 select * from "User";
@@ -422,10 +424,27 @@ totalspercentage NUMERIC(10) not null
 );
 
 create table "Evaluation"(
-pk_id_num NUMERIC(10) primary key,
-id_fun varchar(300) not null,
-periodo varchar(20) not null
+	id_fun varchar(15) not null,
+	periodo varchar(20),
+	status varchar(20),
+	statussign varchar(40),
+	evidence varchar(800),
+	observationsboss varchar(800),
+	observationseva varchar(800),
+	status80 varchar(10),
+	status20 varchar(10),
+	observationsstatus varchar(500),
+	interview varchar(15)
 );
+
+create table "Action"(
+	id_fun varchar(15) not null,
+	periodo varchar(20) not null,
+	aspects varchar(300) not null,
+	actions varchar(300) not null,
+	responsable varchar(50) not null,
+	term varchar(15)
+)
 
 create or replace function insertGoalsAndEvaluations() returns trigger as $insertGoalsAndEvaluations$
 declare
@@ -446,7 +465,7 @@ create trigger insertGoalsAndEvaluations before insert
 on "Goal" for each row
 execute procedure insertGoalsAndEvaluations();
 
-/*Cambios vieja*/
+/*Cambios Natasha*/
 create or replace function listarEvaluacionesPen(pk_id numeric)
 returns setof "Evaluation" as
 $BODY$
@@ -458,7 +477,7 @@ select id_fun into vIdFun from "Functionary" where pk_id_num = pk_id;
 for reg in select * from "Evaluation" where id_fun = vIdFun and status = 'Pendiente' loop
 return next reg;
 end loop;
-for reg in select e.id_fun, e.periodo, e.status from "Evaluation" e
+for reg in select e.id_fun, e.periodo, e.status, e.statussign, e.evidence, e.observationsboss, e.observationseva, e.status80, e.status20, e.observationsstatus, e.interview from "Evaluation" e
 inner join "Functionary" f on f.boss = vIdFun
 where f.id_fun = e.id_fun and e.status = 'Pendiente' loop
 return next reg;
@@ -468,7 +487,7 @@ return;
 end
 $BODY$ language 'plpgsql'
 
-/*Cambios penudo*/
+/*Cambios Jose*/
 create or replace function existEvaluationIndividualSkills(P_id_fun varchar,
 P_period varchar) returns boolean as $$
 declare
@@ -485,7 +504,7 @@ end if;
 end;
 $$ language plpgsql;
 
-/*Cambios penudo termina*/
+/*Cambios Jose termina*/
 
 --dropeo de tablas
 drop table "Period" cascade;
@@ -588,7 +607,7 @@ RAISE NOTICE '% No existe un periodo con ese nombre', new.copy_of;
 else
 V_aux := return_name_period_copy(new.copy_of);
 insert into "Evaluation" (id_fun) select id_fun from "Period_Funcionarity" where pk_period_name = V_aux;
-update "Evaluation" set status = 'Pendiente', periodo = new.pk_period_name WHERE periodo IS NULL;
+update "Evaluation" set status = 'Pendiente', statussign = 'Sin Firmar', periodo = new.pk_period_name WHERE periodo IS NULL;
 
 insert into "Period_Funcionarity" (id_fun) select id_fun from "Period_Funcionarity" where pk_period_name = V_aux;
 UPDATE "Period_Funcionarity" SET pk_period_name = new.pk_period_name WHERE pk_period_name IS NULL;
@@ -596,7 +615,7 @@ end if;
 else
 V_aux := new.pk_period_name;
 insert into "Evaluation" (id_fun) select id_fun from "Functionary";
-update "Evaluation" set status = 'Pendiente', periodo = new.pk_period_name WHERE periodo IS NULL;
+update "Evaluation" set status = 'Pendiente', statussign = 'Sin Firmar', periodo = new.pk_period_name WHERE periodo IS NULL;
 
 insert into "Period_Funcionarity" (id_fun) select id_fun from "Functionary";
 UPDATE "Period_Funcionarity" SET pk_period_name = V_aux WHERE pk_period_name IS NULL;
@@ -621,13 +640,13 @@ on "Period" for each row
 execute procedure assign_status();
 
 insert into "Period"(pk_period_name, beginning, end_, cycle_start, end_of_cycle, percentage_indicators, percentage_components, created_by)
-values ('Periodo 2025','2025-10-04','2025-10-10','2025-10-04','2025-10-13',20,80,'Una test');
+values ('Periodo 2022','2022-10-04','2022-10-10','2022-10-04','2022-10-13',20,80,'Una test');
 
 insert into public."Period"(pk_period_name, beginning, end_, cycle_start, end_of_cycle, percentage_indicators,percentage_components, created_by,copy_of)
-VALUES ('Periodo 2026','2026-10-04','2026-10-10','2026-10-04','2026-10-20',20,80,'Una test','Periodo 2025');
+VALUES ('Periodo 2023','2023-10-04','2023-10-10','2023-10-04','2023-10-20',20,80,'Una test','Periodo 2022');
 
 insert into public."Period"(pk_period_name, beginning, end_, cycle_start, end_of_cycle, percentage_indicators,percentage_components, created_by)
-VALUES ('Periodo 2029','2024-10-04','2024-10-10','2024-10-04','2024-10-20',20,80,'Una test');
+VALUES ('Periodo 2024','2024-10-04','2024-10-10','2024-10-04','2024-10-20',20,80,'Una test');
 
 
 /*Aqui estoy creando una a una las tablas de evaluacion dependiendo la familia*/
