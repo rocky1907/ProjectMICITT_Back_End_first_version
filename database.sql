@@ -27,7 +27,7 @@ create table roles_user(
 create table "User" (
 	pk_id_num NUMERIC(10) primary key,
 	user_name varchar(50) not null, 
-	password varchar(50) not null
+	password varchar(80) not null
 );
 create table "Stimulus" (
 	pk_id_stimulus serial primary key,
@@ -102,6 +102,9 @@ insert into "roles_user" values(2222,'Funcionario');
 insert into "roles_user" values(8767,'Jefe Superior');
 
 INSERT INTO "User" VALUES (1111, 'marylin.masis.gonzalez', 'Micitt_465');
+INSERT INTO "User" VALUES (2304, 'monica.ramirez.cruz', 'Micitt_254');
+INSERT INTO "User" VALUES (8146, 'yendry.rojas.araya', 'Micitt_104');
+INSERT INTO "User" VALUES (8206, 'maría.grossi.castillo', 'Micitt_786');
 
 INSERT INTO "User" VALUES (2222, 'esteban.monge.cordero', 'Micitt_561');
 
@@ -1013,6 +1016,27 @@ insert into "BossSkill_3" values ('Promover ambiente de respeto antes situacione
 ('Búsqueda de soluciones','Manejo y resolución de conflictos'),
 ('Control y manejo emocional','Manejo y resolución de conflictos');
 
+/*Nuevo*/
+
+create or replace function find_user(Pid_user numeric) returns boolean as $$
+declare
+V_pk numeric;
+V_user varchar;
+
+Begin
+V_pk:=0;
+V_user:='null';
+
+select "pk_id_num","user_name" into v_pk,v_user from User where pk_id_num=Pid_user;
+if V_pk =0 or V_pk is null and V_user ='null' or V_user is null then
+return false;
+else 
+return true;
+end if;
+end;
+$$ LANGUAGE plpgsql;
+select  find_user(1111);
+SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_NAME = 'public.User';
 
 
 

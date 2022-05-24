@@ -22,6 +22,7 @@ router.post('/alta-direccion-publica/goalsTotal', controller.addEvaluation80Tota
 router.get('/alta-direccion-publica/goalsTotal', controller.getEvaTotals80);
 
 router.post('/alta-direccion-publica/competencies',controller.addCompetencies);
+router.get('/alta-direccion-publica/competencies/:id',controller.getCompetenceADP );
 router.post('/alta-direccion-publica/competencies/addorupdate',controller.addOrUpdate);
 //router.post('/periods',controller.addPeriod);
 module.exports = router;
