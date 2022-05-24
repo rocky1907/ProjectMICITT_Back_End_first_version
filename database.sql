@@ -15,7 +15,6 @@ select * from "roles_user";
 
 
 delete from "User";
-delete from "roles_user";
 delete from "Functionary";
 
 create table "Role" (pk_role_name varchar(50) primary key);
@@ -27,7 +26,7 @@ create table roles_user(
 create table "User" (
 	pk_id_num NUMERIC(10) primary key,
 	user_name varchar(50) not null, 
-	password varchar(80) not null
+	password varchar(50) not null
 );
 create table "Stimulus" (
 	pk_id_stimulus serial primary key,
@@ -102,9 +101,6 @@ insert into "roles_user" values(2222,'Funcionario');
 insert into "roles_user" values(8767,'Jefe Superior');
 
 INSERT INTO "User" VALUES (1111, 'marylin.masis.gonzalez', 'Micitt_465');
-INSERT INTO "User" VALUES (2304, 'monica.ramirez.cruz', 'Micitt_254');
-INSERT INTO "User" VALUES (8146, 'yendry.rojas.araya', 'Micitt_104');
-INSERT INTO "User" VALUES (8206, 'maría.grossi.castillo', 'Micitt_786');
 
 INSERT INTO "User" VALUES (2222, 'esteban.monge.cordero', 'Micitt_561');
 
@@ -125,9 +121,9 @@ insert into "Role" values ('Evaluador');
 insert into "Role" values ('Jefe Superior');		
 insert into "Role" values ('Administrador');		
 		
-/*insert into "roles_user" values(1111,'Funcionario');
+insert into "roles_user" values(1111,'Funcionario');
 insert into "roles_user" values(1111,'Supervisor Recursos Humanos');
-insert into "roles_user" values(2222,'Funcionario');*/
+insert into "roles_user" values(2222,'Funcionario');
 
 insert into "department_CIT_Boss" values (097540,'Despacho Ministerial');
 insert into "department_TELECOM_Boss" values (356259,'Departamento de Políticas Públicas de Telecomunicaciones');
@@ -367,13 +363,11 @@ insert into "department_CIT" values('Unidad de Servicios Tecnológicos');
 insert into "department_CIT" values('Viceministro de Ciencia, Innovación y Tecnológía');
 
 select * from "Agreement";
-select * from "Evaluation";
-select * from "Goal";
+
 /*Cambios Brit*/
 
 drop table "Goal" cascade;
 drop table "Agreement" cascade;
-drop table "Evaluation" cascade;
 
 create table "Agreement" (
 pk_id_num NUMERIC(10) primary key,
@@ -428,10 +422,10 @@ totalspercentage NUMERIC(10) not null
 );
 
 create table "Evaluation"(
+pk_id_num NUMERIC(10) primary key,
 id_fun varchar(300) not null,
-periodo varchar(20),
-status varchar(100)
-)
+periodo varchar(20) not null
+);
 
 create or replace function insertGoalsAndEvaluations() returns trigger as $insertGoalsAndEvaluations$
 declare
@@ -922,8 +916,6 @@ select * from "levelOfDevelopment";
 select * from "evaluationIndividualSkills";
 select * from "rubricEvaluation";
 
-insert into "Evaluation" values ('3-0456-0292', 'Periodo 2021', 'Validado');
-
 create table "professionalSkills-weighted_3"(
 	firstLevel decimal not null,
 	secondLevel decimal not null,
@@ -1016,27 +1008,6 @@ insert into "BossSkill_3" values ('Promover ambiente de respeto antes situacione
 ('Búsqueda de soluciones','Manejo y resolución de conflictos'),
 ('Control y manejo emocional','Manejo y resolución de conflictos');
 
-/*Nuevo*/
-
-create or replace function find_user(Pid_user numeric) returns boolean as $$
-declare
-V_pk numeric;
-V_user varchar;
-
-Begin
-V_pk:=0;
-V_user:='null';
-
-select "pk_id_num","user_name" into v_pk,v_user from User where pk_id_num=Pid_user;
-if V_pk =0 or V_pk is null and V_user ='null' or V_user is null then
-return false;
-else 
-return true;
-end if;
-end;
-$$ LANGUAGE plpgsql;
-select  find_user(1111);
-SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_NAME = 'public.User';
 
 
 
