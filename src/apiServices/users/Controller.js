@@ -8,11 +8,11 @@ const getUsers = async (req,res)=>{
     res.status(200).json(response.rows);
 }
 const addUser = async (req, res)=>{
-
-    let {pk_id_num,user_name, password} = req.body;
     
-        let user= await pool.query('SELECT * FROM public."User" where pk_id_num=$1;',[pk_id_num]);
-        //console.log(user.rowCount==!0);
+    let {user_id,user_name, password} = req.body;
+    
+        let user= await pool.query('SELECT * FROM public."User" where pk_id_num=$1;',[user_id]);
+        console.log(password);
         //aux=JSON.parse(user.rowCount);
         
         if(user.rowCount==!0){
@@ -24,12 +24,12 @@ const addUser = async (req, res)=>{
             let salt = bcrypt.genSaltSync();
             password= bcrypt.hashSync(password,salt);
     
-            let token = await generarJWT(pk_id_num,user_name);
-            let response = await pool.query('INSERT INTO public."User"(pk_id_num, user_name, password) VALUES ($1,$2,$3)',[pk_id_num, user_name, password]);  
+            let token = await generarJWT(user_id,user_name);
+            let response = await pool.query('INSERT INTO public."User"(pk_id_num, user_name, password) VALUES ($1,$2,$3)',[user_id, user_name, password]);  
         
         return res.status(201).json({
             ok: true,
-            uid: pk_id_num,
+            uid: user_id,
             name:user_name,
             token
         });
