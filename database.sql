@@ -6,6 +6,7 @@ drop table "Stimulus" cascade;
 drop table "job_class_CIT" cascade;
 drop table "job_class_TELECOM" cascade;
 drop table "Department_Boss" cascade;
+drop table "Evaluation" cascade;
 
 select * from "Functionary";
 select * from "User";
