@@ -422,9 +422,17 @@ totalspercentage NUMERIC(10) not null
 );
 
 create table "Evaluation"(
-pk_id_num NUMERIC(10) primary key,
-id_fun varchar(300) not null,
-periodo varchar(20) not null
+	id_fun varchar(15) not null,
+	periodo varchar(20),
+	status varchar(20),
+	statussign varchar(40),
+	evidence varchar(800),
+	observationsboss varchar(800),
+	observationseva varchar(800),
+	status80 varchar(10),
+	status20 varchar(10),
+	observationsstatus varchar(500),
+	interview varchar(15)
 );
 
 create or replace function insertGoalsAndEvaluations() returns trigger as $insertGoalsAndEvaluations$
@@ -458,7 +466,7 @@ select id_fun into vIdFun from "Functionary" where pk_id_num = pk_id;
 for reg in select * from "Evaluation" where id_fun = vIdFun and status = 'Pendiente' loop
 return next reg;
 end loop;
-for reg in select e.id_fun, e.periodo, e.status from "Evaluation" e
+for reg in select e.id_fun, e.periodo, e.status, e.statussign, e.evidence, e.observationsboss, e.observationseva, e.status80, e.status20, e.observationsstatus, e.interview from "Evaluation" e
 inner join "Functionary" f on f.boss = vIdFun
 where f.id_fun = e.id_fun and e.status = 'Pendiente' loop
 return next reg;
@@ -676,7 +684,7 @@ RAISE NOTICE '% No existe un periodo con ese nombre', new.copy_of;
 else
 V_aux := return_name_period_copy(new.copy_of);
 insert into "Evaluation" (id_fun) select id_fun from "Period_Funcionarity" where pk_period_name = V_aux;
-update "Evaluation" set status = 'Pendiente', periodo = new.pk_period_name WHERE periodo IS NULL;
+update "Evaluation" set status = 'Pendiente', statussign = 'Sin Firmar', periodo = new.pk_period_name WHERE periodo IS NULL;
 
 insert into "Period_Funcionarity" (id_fun) select id_fun from "Period_Funcionarity" where pk_period_name = V_aux;
 UPDATE "Period_Funcionarity" SET pk_period_name = new.pk_period_name WHERE pk_period_name IS NULL;
@@ -684,7 +692,7 @@ end if;
 else
 V_aux := new.pk_period_name;
 insert into "Evaluation" (id_fun) select id_fun from "Functionary";
-update "Evaluation" set status = 'Pendiente', periodo = new.pk_period_name WHERE periodo IS NULL;
+update "Evaluation" set status = 'Pendiente', statussign = 'Sin Firmar', periodo = new.pk_period_name WHERE periodo IS NULL;
 
 insert into "Period_Funcionarity" (id_fun) select id_fun from "Functionary";
 UPDATE "Period_Funcionarity" SET pk_period_name = V_aux WHERE pk_period_name IS NULL;
@@ -704,6 +712,7 @@ new.creation_date:= current_timestamp;
 return new;
 end;
 $assign_status$ LANGUAGE plpgsql;
+
 create trigger assign_status before insert
 on "Period" for each row
 execute procedure assign_status();
