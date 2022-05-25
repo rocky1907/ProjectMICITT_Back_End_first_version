@@ -26,7 +26,7 @@ create table roles_user(
 create table "User" (
 	pk_id_num NUMERIC(10) primary key,
 	user_name varchar(50) not null, 
-	password varchar(50) not null
+	password varchar(80) not null
 );
 create table "Stimulus" (
 	pk_id_stimulus serial primary key,
@@ -1097,6 +1097,135 @@ insert into "BossSkill_3" values ('Promover ambiente de respeto antes situacione
 ('Control y manejo emocional','Manejo y resolución de conflictos');
 
 
+CREATE TABLE "competencies_adp"(
+	fun_id character varying(100) NOT NULL,
+    periodo character varying(100),
+    item1_auto character varying(20),
+    item2_auto character varying(20),
+    item3_auto character varying(20),
+    item4_auto character varying(20),
+    item5_auto character varying(20),
+    item6_auto character varying(20),
+    item7_auto character varying(20),
+    item8_auto character varying(20),
+    item9_auto character varying(20),
+    item10_auto character varying(20),
+    item11_auto character varying(20),
+    item12_auto character varying(20),
+    item13_auto character varying(20),
+    item14_auto character varying(20),
+    item15_auto character varying(20),
+    item16_auto character varying(20),
+    item17_auto character varying(20),
+    item18_auto character varying(20),
+    item1_chief character varying(20),
+    item2_chief character varying(20),
+    item3_chief character varying(20),
+    item4_chief character varying(20),
+    item5_chief character varying(20),
+    item6_chief character varying(20),
+    item7_chief character varying(20),
+    item8_chief character varying(20),
+    item9_chief character varying(20),
+    item10_chief character varying(20),
+    item11_chief character varying(20),
+    item12_chief character varying(20),
+    item13_chief character varying(20),
+    item14_chief character varying(20),
+    item15_chief character varying(20),
+    item16_chief character varying(20),
+    item17_chief character varying(20),
+    item18_chief character varying(20)
+);
+
+CREATE or replace FUNCTION showPeriod_by_Period_name(P_period_name varchar)
+RETURNS SETOF "Period" AS
+$BODY$
+DECLARE
+reg RECORD;
+BEGIN
+FOR REG IN SELECT * FROM "Period" where pk_period_name = P_period_name LOOP
+RETURN NEXT reg;
+END LOOP;
+RETURN;
+END
+$BODY$ LANGUAGE 'plpgsql'
+select * from showPeriod_by_Period_name('Periodo 2025');
+
+
+
+create or replace function exist_period_init() returns boolean as $$
+declare
+V_id varchar(30);
+begin
+select status into V_id from "Period" where status = 'Iniciado';
+if V_id = 'Iniciado' then
+return true;
+end if;
+return false;
+end;
+$$ LANGUAGE plpgsql;
+select * from exist_period_init();
+
+
+
+create or replace function period_init(P_period_name varchar)
+returns boolean as $body$
+declare
+V_sta boolean;
+begin
+V_sta := exist_period_init();
+if V_sta != true then
+update "Period" set status = 'Iniciado' where pk_period_name = P_period_name;
+return true;
+else
+return false;
+end if;
+exception
+when others then
+return false;
+end;
+$body$ language plpgsql;
+
+
+
+create or replace function period_finish(P_period_name varchar)
+returns boolean as $body$
+declare
+V_sta varchar(30);
+begin
+select status into V_sta from "Period" where pk_period_name = P_period_name;
+if V_sta = 'Iniciado' then
+update "Period" set status = 'Concluido' where pk_period_name = P_period_name;
+return true;
+else
+return false;
+end if;
+exception
+when others then
+return false;
+end;
+$body$ language plpgsql;
+
+
+
+create or replace function period_delete(P_period_name varchar)
+returns boolean as $body$
+declare
+V_sta varchar(30);
+begin
+select pk_period_name into V_sta from "Period" where pk_period_name = P_period_name;
+if V_sta = P_period_name then
+delete from "Period" where pk_period_name = P_period_name;
+return true;
+else
+return false;
+end if;
+exception
+when others then
+return false;
+end;
+$body$ language plpgsql;
 
 
 
