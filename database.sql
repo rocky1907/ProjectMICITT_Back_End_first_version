@@ -14,7 +14,6 @@ select * from "Stimulus";
 select * from "Role";
 select * from "roles_user";
 
-
 delete from "User";
 delete from "Functionary";
 
@@ -370,6 +369,9 @@ select * from "Agreement";
 drop table "Goal" cascade;
 drop table "Agreement" cascade;
 
+select * from "Agreement";
+
+
 create table "Agreement" (
 pk_id_num NUMERIC(10) primary key,
 id_fun varchar(50) not null,
@@ -389,6 +391,8 @@ stim varchar(500) not null
 
 );
 
+select * from "Goal";
+drop table "Goal";
 create table "Goal"(
 pk_id_num NUMERIC(10) primary key,
 objective varchar(800) not null,
@@ -400,7 +404,8 @@ followDate varchar(50),
 observations varchar(500),
 id_agreement numeric(10)
 );
-
+drop table "goalsEvaluation80";
+select * from "goalsEvaluation80";
 create table "goalsEvaluation80"(
 pk_id_num NUMERIC(10) primary key,
 id_fun varchar(300),
@@ -415,6 +420,7 @@ observations1 varchar(500)
 
 );
 
+drop table "Evaluation80Totals"
 create table "Evaluation80Totals"(
 id_fun varchar(30) not null,
 periodo varchar(20) not null,
@@ -1237,5 +1243,7 @@ return false;
 end;
 $body$ language plpgsql;
 
+
+select * from "Evaluation";
 
 
