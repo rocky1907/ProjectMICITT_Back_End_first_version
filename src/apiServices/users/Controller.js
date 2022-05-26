@@ -47,7 +47,9 @@ const getUserByUserName = async (req,res)=>{
 
 const changePasswordById = async(req, res)=>{
     const id = req.params.id;
-    const {password} = req.body;
+    let {password} = req.body;
+    let salt = bcrypt.genSaltSync();
+    password= bcrypt.hashSync(password,salt);
     const response = await pool.query('UPDATE public."User" set password = $1 where pk_id_num = $2',[password, id]);
     res.json('User Password Updated successfully: '+ response.rows);
     };
@@ -61,7 +63,9 @@ const changeUserNameById = async(req, res)=>{
 
 const changePasswordName = async(req, res)=>{
     const user_name = req.params.user_name;
-    const {password} = req.body;
+    let {password} = req.body;
+    let salt = bcrypt.genSaltSync();
+    password= bcrypt.hashSync(password,salt);
     const response = await pool.query('UPDATE public."User" set password = $1 where user_name = $2',[password, user_name]);
     res.json('User Password Updated successfully: '+ response.rows);
   };
