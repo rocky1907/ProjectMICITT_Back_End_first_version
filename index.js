@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const multer = require("multer");
+const path = require('path')
 
 // middlewares, hace referencia a algunas funciones que se ejecutan antes de que lleguen a las rutas
 app.use(express.json());
@@ -31,6 +32,12 @@ const stor = multer.diskStorage({
 const upload = multer({storage:stor});
 app.post("/upload", upload.single('myfile'), (req,res) => {
     res.send({data: 'OK'})
+})
+
+app.post("/download/manual",function(req,res,next){
+  filepath =path.join(__dirname,'./src/files/')+req.body.filename;
+  console.log(filepath);
+  res.sendFile(filepath);
 })
 app.listen(3000);
 console.log("Serve on port 3000");
