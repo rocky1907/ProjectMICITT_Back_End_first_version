@@ -30,6 +30,7 @@ router.post('/alta-direccion-publica/competencies/addorupdate',controller.addOrU
 router.get('/evaluation/:id/:per',controller.getEvaluation);
 router.get('/evaluation/action/:id/:per', controller.getActions);
 router.post('/evaluation/action/', controller.addAction);
+router.get('/allevaluations',controller.getAllEvaluation);
 
 //router.post('/periods',controller.addPeriod);
 module.exports = router;

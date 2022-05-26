@@ -486,7 +486,10 @@ const addAction = async (req,res)=>{
         }
     })
 };
-
+const getAllEvaluation = async (req, res) => {
+    const response = await pool.query('select * from showEvaluations();');
+    res.status(200).json(response.rows);
+}
 
 module.exports = {
     getDescriptions,
@@ -515,6 +518,7 @@ module.exports = {
     updateEvaluation,
     getEvaluation,
     getActions,
-    addAction
+    addAction,
+    getAllEvaluation
 
 }

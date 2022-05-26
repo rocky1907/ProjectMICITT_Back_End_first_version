@@ -109,6 +109,10 @@ const getFunctionaryByIdBoss = async (req,res)=>{
   const response = await pool.query('select * from public."Functionary" where "boss" = $1;', [id]);
   res.status(200).json(response.rows);
 }
+const getFunctionary_evaluations = async (req, res) => {
+  const response = await pool.query('select * from showFunctionary();');
+  res.status(200).json(response.rows);
+}
 
 
 module.exports = {
@@ -129,5 +133,6 @@ module.exports = {
   getPkIDByIdFun,
   getFunctionaryByPkID,
   getFunctionaryByID,
-  getFunctionaryByIdBoss
+  getFunctionaryByIdBoss,
+  getFunctionary_evaluations
 } 

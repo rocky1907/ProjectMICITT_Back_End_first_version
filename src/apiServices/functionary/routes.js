@@ -23,6 +23,7 @@ router.get('/functionary/:id_fun', controller.getPkIDByIdFun);
 router.get('/functionary/boss/:id', controller.getFunctionaryByPkID);
 router.get('/functionary/idFun/:id_fun', controller.getFunctionaryByID);
 router.get('/functionary/idBoss/:id', controller.getFunctionaryByIdBoss);
+router.get('/functionary-evaluations', controller.getFunctionary_evaluations);
 
 
 module.exports = router;

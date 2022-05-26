@@ -428,6 +428,7 @@ totalsobtained NUMERIC(10) not null,
 totalspercentage NUMERIC(10) not null
 );
 
+select * from "Evaluation";
 create table "Evaluation"(
 	id_fun varchar(15) not null,
 	periodo varchar(20),
