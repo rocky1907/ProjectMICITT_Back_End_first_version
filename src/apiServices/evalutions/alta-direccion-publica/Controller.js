@@ -487,6 +487,27 @@ const addAction = async (req,res)=>{
     })
 };
 
+const updateEvaStatus = async(req,res)=>{
+    const id = req.params.id;
+    const per = req.params.per;
+    const {status} = req.body;
+    const response = await pool.query('UPDATE public."Evaluation" set status = $1 where id_fun = $2 and periodo = $3',[status, id, per]);
+    res.json('Status Evaluation Updated successfully: '+response.rows);
+};
+
+const updateStatusSign = async(req,res)=>{
+    const id = req.params.id;
+    const per = req.params.per;
+    const {statussign} = req.body;
+    const response = await pool.query('UPDATE public."Evaluation" set statussign = $1 where id_fun = $2 and periodo = $3',[statussign, id, per]);
+    res.json('Status Evaluation Updated successfully: '+response.rows);
+};
+
+const getEvaAccord = async (req,res)=>{
+    const response = await pool.query('select * from public."Evaluation" where status =\'Conformidad\';');
+    res.status(200).json(response.rows);
+}
+
 
 module.exports = {
     getDescriptions,
@@ -515,6 +536,9 @@ module.exports = {
     updateEvaluation,
     getEvaluation,
     getActions,
-    addAction
+    addAction,
+    updateEvaStatus,
+    updateStatusSign,
+    getEvaAccord
 
 }
