@@ -463,12 +463,12 @@ vIdFun varchar(30);
 reg RECORD;
 begin
 select id_fun into vIdFun from "Functionary" where pk_id_num = pk_id;
-for reg in select * from "Evaluation" where id_fun = vIdFun and status = 'Pendiente' loop
+for reg in select * from "Evaluation" where id_fun = vIdFun and (status = 'Pendiente' or status = 'En Curso' or status ='En Revisión' or status = 'Entrevistado' or status = 'Evaluado') loop
 return next reg;
 end loop;
 for reg in select e.id_fun, e.periodo, e.status, e.statussign, e.evidence, e.observationsboss, e.observationseva, e.status80, e.status20, e.observationsstatus, e.interview from "Evaluation" e
 inner join "Functionary" f on f.boss = vIdFun
-where f.id_fun = e.id_fun and e.status = 'Pendiente' loop
+where f.id_fun = e.id_fun and (e.status = 'Pendiente' or e.status = 'En Curso' or e.status = 'En Revisión' or e.status = 'Entrevistado' or e.status = 'Evaluado') loop
 return next reg;
 end loop;
 
@@ -1235,6 +1235,37 @@ when others then
 return false;
 end;
 $body$ language plpgsql;
+
+
+CREATE TABLE "Action"(
+	id_fun varchar(15) not null,
+	periodo varchar(20) not null,
+	aspects varchar(300),
+	actions varchar(300),
+	responsable varchar(50),
+	term varchar(15)
+);
+
+create or replace function listarEvaluacionesConf(pk_id numeric)
+returns setof "Evaluation" as
+$BODY$
+declare
+vIdFun varchar(30);
+reg RECORD;
+begin
+select id_fun into vIdFun from "Functionary" where pk_id_num = pk_id;
+for reg in select * from "Evaluation" where id_fun = vIdFun and status = 'Conformidad' loop
+return next reg;
+end loop;
+for reg in select e.id_fun, e.periodo, e.status, e.statussign, e.evidence, e.observationsboss, e.observationseva, e.status80, e.status20, e.observationsstatus, e.interview from "Evaluation" e
+inner join "Functionary" f on f.boss = vIdFun
+where f.id_fun = e.id_fun and e.status = 'Conformidad' loop
+return next reg;
+end loop;
+
+return;
+end
+$BODY$ language 'plpgsql'
 
 
 
