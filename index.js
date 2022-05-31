@@ -16,9 +16,11 @@ app.use(require('./src/apiServices/functionary/routes'));
 app.use(require('./src/apiServices/roles/routes'));
 app.use(require('./src/apiServices/periods/routes'));
 app.use(require('./src/apiServices/evalutions/alta-direccion-publica/routes'));
+app.use(require('./src/apiServices/evalutions/gerencia-administracion/routes'));
 app.use(require('./src/apiServices/agreement/routes'));
 app.use(require('./src/apiServices/goal/routes'));
 app.use('/auth/',require('./controllers/routes'));
+
 const stor = multer.diskStorage({
     filename: function (res, file, cb) {
       //const ext = file.originalname.split(".").pop(); mantener extencion por si se cambia nombre
