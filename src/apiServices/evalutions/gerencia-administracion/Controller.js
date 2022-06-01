@@ -6,4 +6,10 @@ const getGerenciaProSkillActions = async (req,res)=>{
     res.status(200).json(response.rows);
 }
 
-module.exports = {getGerenciaProSkillActions}
+const getGerenciaBossSkillActions = async (req,res)=>{
+    const response = await pool.query('select * from public."BossSkill";');
+    res.status(200).json(response.rows);
+}
+
+module.exports = {getGerenciaProSkillActions,
+                  getGerenciaBossSkillActions}
