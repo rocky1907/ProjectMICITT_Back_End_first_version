@@ -24,7 +24,7 @@ router.get('/alta-direccion-publica/goalsTotal', controller.getEvaTotals80);
 router.get('/alta-direccion-publica/percentage80/:id/:per', controller.getTotals80);
 router.get('/alta-direccion-publica/percentage20/:id/:per', controller.getTotals20);
 router.post('/alta-direccion-publica/competencies',controller.addCompetencies);
-router.get('/alta-direccion-publica/competencies/:id',controller.getCompetenceADP );
+router.get('/alta-direccion-publica/competencies/:id/:periodo',controller.getCompetenceADP );
 router.post('/alta-direccion-publica/competencies/addorupdate',controller.addOrUpdate);
 
 router.get('/evaluation/:id/:per',controller.getEvaluation);
