@@ -20,6 +20,8 @@ app.use(require('./src/apiServices/evalutions/gerencia-administracion/routes'));
 app.use(require('./src/apiServices/evalutions/investigacion-analisis-asesoramiento/routes'));
 app.use(require('./src/apiServices/evalutions/no-profesional/routes'));
 app.use(require('./src/apiServices/evalutions/prestacion-servicios/routes'));
+app.use(require('./src/apiServices/evalutions/telecom-gerencial/routes'));
+app.use(require('./src/apiServices/evalutions/telecom-pro/routes'));
 app.use(require('./src/apiServices/agreement/routes'));
 app.use(require('./src/apiServices/goal/routes'));
 app.use('/auth/',require('./controllers/routes'));

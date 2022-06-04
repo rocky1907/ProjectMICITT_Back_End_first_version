@@ -366,6 +366,12 @@ const getRubricEvaluation = async (req,res)=>{
     const response = await pool.query('select * from public."rubricEvaluation";');
     res.status(200).json(response.rows);
 }
+
+const getRubricEvaluationTelecom = async (req,res)=>{
+    const response = await pool.query('SELECT * FROM public."rubric_evaluation_telecom";');
+    res.status(200).json(response.rows);
+}
+
 const getBossSkill = async (req,res)=>{
     const response = await pool.query('select * from public."professionalSkillsName_3";');
     res.status(200).json(response.rows);
@@ -560,7 +566,8 @@ module.exports = {
     addAction,
     updateEvaStatus,
     updateStatusSign,
-    getEvaAccord
+    getEvaAccord,
+    getRubricEvaluationTelecom
 
 }
 
