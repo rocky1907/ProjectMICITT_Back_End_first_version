@@ -1,6 +1,52 @@
 const { response } = require('express');
 //const {pool} = require('../database.conecction/pg.conecction'); asi se importa una clase
 const {pool} = require('../../PostgresConecction/PgConecction');
+const nodeMailer = require('nodemailer');
+
+const sendMail = (req, res) => {
+    let body = req.body;
+    let config = nodeMailer.createTransport({
+        host: 'smtp.gmail.com',
+        post: 587,
+        auth: {
+            //Credenciales del MICITT
+            user: 'alemanrodrigo1907@gmail.com',
+            pass: 'knnzsmmbkctaxgyq'
+        }
+    });
+
+    for (var i = 0; i < body.length; i++) {
+        config.sendMail(options = {
+            from: 'SEDI',
+            subject: body[i].asunto,
+            to: body[i].email,
+            text: body[i].mensaje,
+            html: `
+            <table border="0" cellpadding="0" cellspacing="0" width="600px" background-color="#0095da" bgcolor="#87CEEB">
+            <tr height="200px">  
+                <td bgcolor="" width="600px">
+                    <h1 style="color: #fff; text-align:center">MICITT</h1>
+                    <p  style="color: #fff; text-align:center">
+                        <span style="color: #000000">${body[i].mensaje}</span> 
+                    </p>
+                </td>
+            </tr>
+            <tr bgcolor="#fff">
+                <td style="text-align:center">
+                    <p style="color: #000">Por favor, no responda este correo</p>
+                </td>
+            </tr>
+            </table>
+            `
+        }, function (error, result) {
+            if (error) return res.json({ ok: false, msj: error })
+            return res.json({
+                ok: true,
+                msg: "Correos enviados con éxito"
+            });
+        })
+    }
+}
 
 function randomNum(){
   var val= Math. floor(1000 + Math. random() * 9000);
@@ -129,5 +175,6 @@ module.exports = {
   getPkIDByIdFun,
   getFunctionaryByPkID,
   getFunctionaryByID,
-  getFunctionaryByIdBoss
+  getFunctionaryByIdBoss,
+  sendMail
 } 
