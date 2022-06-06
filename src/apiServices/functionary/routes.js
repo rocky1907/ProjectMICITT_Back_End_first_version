@@ -24,6 +24,9 @@ router.get('/functionary/boss/:id', controller.getFunctionaryByPkID);
 router.get('/functionary/idFun/:id_fun', controller.getFunctionaryByID);
 router.get('/functionary/idBoss/:id', controller.getFunctionaryByIdBoss);
 router.get('/functionary-evaluations', controller.getFunctionary_evaluations);
+router.get('/functionary-by-family', controller.getFunctionary_Inevaluations_family);
+router.get('/functionary-by-stratun', controller.getFunctionary_Inevaluations_stratum);
+router.get('/functionary-by-reports-by-family', controller.reports_by_family);
 
 
 module.exports = router;
