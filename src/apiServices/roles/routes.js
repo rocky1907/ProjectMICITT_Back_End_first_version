@@ -9,6 +9,7 @@ router.delete('/role/:pk_role_name',controller.deleteRoleByName);
 router.post('/roleuser', controller.addRoles_user);
 router.get('/roleBoss', controller.getRoleBoss);
 router.get('/roleuser/:id',controller.getRoleFunId);
+router.get('/roleevaluado/:id',controller.getRoleEvaluado);
 router.delete('/roleuser/:id/:role_name',controller.deleteRoleFun);
 
 module.exports = router;

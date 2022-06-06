@@ -52,6 +52,11 @@ const getRoleFunId = async(req,res)=>{
     const response = await pool.query('select * from public."roles_user" where id_user = $1',[id]);
     res.status(200).json(response.rows);
 };
+const getRoleEvaluado = async(req,res)=>{
+    const id = req.params.id;
+    const response = await pool.query('select * from role_evaluado($1) AS (id_user numeric,role_name varchar,family_group varchar,occupational_stratum varchar);',[id]);
+    res.status(200).json(response.rows);
+};
 
 module.exports = {
     getRoles,
@@ -60,5 +65,6 @@ module.exports = {
     addRole,
     getRoleBoss,
     getRoleFunId,
-    deleteRoleFun
+    deleteRoleFun,
+    getRoleEvaluado
 }

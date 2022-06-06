@@ -7,6 +7,7 @@ const router = express.Router();
 //const {getUsers, createUser, getUserById, deleteUser, updateUser} = require('../controllers/users.controller');
 router.get('/functionary',controller.getFunctionary);
 router.post('/functionary',controller.addFunctionary);
+router.post('/functionary/notify',controller.sendMail);
 router.put('/functionary/:id',controller.updateFunById);
 router.get('/functionary/stratums', controller.getOccupationalStratum);
 router.get('/functionary/specialty', controller.getSpecialty);
