@@ -490,6 +490,8 @@ const getAllEvaluation = async (req, res) => {
     const response = await pool.query('select * from showEvaluations();');
     res.status(200).json(response.rows);
 }
+
+const updateEvaStatus = async(req,res)=>{
     const {status} = req.body;
     const response = await pool.query('UPDATE public."Evaluation" set status = $1 where id_fun = $2 and periodo = $3',[status, id, per]);
     res.json('Status Evaluation Updated successfully: '+response.rows);
