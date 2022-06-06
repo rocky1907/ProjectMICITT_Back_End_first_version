@@ -31,6 +31,7 @@ router.get('/evaluation/:id/:per',controller.getEvaluation);
 router.get('/evaluation/action/:id/:per', controller.getActions);
 router.post('/evaluation/action/', controller.addAction);
 router.put('/evaStatus/:id/:per', controller.updateEvaStatus);
+router.get('/allevaluations',controller.getAllEvaluation);
 router.put('/statusSign/:id/:per', controller.updateStatusSign);
 router.get('/evaluationsAccord',controller.getEvaAccord);
 

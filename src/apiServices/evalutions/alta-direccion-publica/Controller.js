@@ -486,10 +486,10 @@ const addAction = async (req,res)=>{
         }
     })
 };
-
-const updateEvaStatus = async(req,res)=>{
-    const id = req.params.id;
-    const per = req.params.per;
+const getAllEvaluation = async (req, res) => {
+    const response = await pool.query('select * from showEvaluations();');
+    res.status(200).json(response.rows);
+}
     const {status} = req.body;
     const response = await pool.query('UPDATE public."Evaluation" set status = $1 where id_fun = $2 and periodo = $3',[status, id, per]);
     res.json('Status Evaluation Updated successfully: '+response.rows);
@@ -537,6 +537,7 @@ module.exports = {
     getEvaluation,
     getActions,
     addAction,
+    getAllEvaluation,
     updateEvaStatus,
     updateStatusSign,
     getEvaAccord
