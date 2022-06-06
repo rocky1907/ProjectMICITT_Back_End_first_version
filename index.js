@@ -19,6 +19,7 @@ app.use(require('./src/apiServices/evalutions/alta-direccion-publica/routes'));
 app.use(require('./src/apiServices/agreement/routes'));
 app.use(require('./src/apiServices/goal/routes'));
 app.use('/auth/',require('./controllers/routes'));
+
 const stor = multer.diskStorage({
     filename: function (res, file, cb) {
       //const ext = file.originalname.split(".").pop(); mantener extencion por si se cambia nombre
@@ -26,10 +27,11 @@ const stor = multer.diskStorage({
       cb(null, `${file.originalname}`);
     },
     destination: function (res, file, cb) {
-      cb(null, `./src/files`);
+      cb(null, `./src/files/`);
     },
-  });
+});
 const upload = multer({storage:stor});
+//upload.destination.cb(null, `./src/files/` + this.single('periodo'));
 app.post("/upload", upload.single('myfile'), (req,res) => {
     res.send({data: 'OK'})
 })
@@ -39,5 +41,13 @@ app.post("/download/manual",function(req,res,next){
   console.log(filepath);
   res.sendFile(filepath);
 })
+
+app.post("/download/evaluation",function(req,res,next){
+  filepath =path.join(__dirname,'./src/files/')+req.body.filename;
+  console.log(filepath);
+  res.sendFile(filepath);
+})
+
 app.listen(3000);
 console.log("Serve on port 3000");
+
