@@ -52,17 +52,19 @@ const getPeriods = async (req, res) => {
     res.status(200).json(response.rows);
 }
 const addPeriod = async (req, res) => {
-    const { periodName, periodStart, periodEnd, cycleStart, cycleEnd,
-        createdBy, copyForm, componetsPorcen, indicatorPorc } = req.body;
-    if (copyForm === '' || copyForm === 'Seleccionar') {
+    console.log(req.body)
+    const { pk_period_name, beginning, end_, cycle_start, end_of_cycle, percentage_indicators, percentage_components,
+        created_by, copy_of } = req.body;
+        
+    if (copy_of === '' || copy_of === 'Seleccionar') {
         const response = await pool.query('insert into public."Period"(pk_period_name, beginning, end_, cycle_start, end_of_cycle, percentage_indicators, percentage_components, created_by) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
-            [periodName, periodStart, periodEnd, cycleStart, cycleEnd, parseInt(indicatorPorc), parseInt(componetsPorcen), createdBy]);
+            [pk_period_name, beginning, end_, cycle_start, end_of_cycle, parseInt(percentage_indicators), parseInt(percentage_components), created_by]);
         res.json({
             message: 'Periodo creado con exito',
         })
     } else {
         const response = await pool.query('insert into public."Period"(pk_period_name, beginning, end_, cycle_start, end_of_cycle, percentage_indicators, percentage_components, created_by,copy_of) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
-            [periodName, periodStart, periodEnd, cycleStart, cycleEnd, parseInt(indicatorPorc), parseInt(componetsPorcen), createdBy, copyForm]);
+            [pk_period_name, beginning, end_, cycle_start, end_of_cycle, parseInt(percentage_indicators), parseInt(percentage_components), created_by, copy_of]);
         res.json({
             message: 'Periodo creado con exito',
         })
