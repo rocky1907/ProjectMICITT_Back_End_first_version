@@ -27,6 +27,7 @@ router.get('/alta-direccion-publica/percentage20/:id/:per', controller.getTotals
 router.post('/alta-direccion-publica/competencies',controller.addCompetencies);
 router.get('/alta-direccion-publica/competencies/:id/:periodo',controller.getCompetenceADP );
 router.post('/alta-direccion-publica/competencies/addorupdate',controller.addOrUpdate);
+//router.post('/alta-direccion-publica/competencies/appeals/',controller.addOrUpdateAppeals);
 
 router.get('/evaluation/:id/:per',controller.getEvaluation);
 router.get('/evaluation/action/:id/:per', controller.getActions);
@@ -39,8 +40,9 @@ router.get('/evaluationsDisagree/:id_fun',controller.getEvaDisagree);
 
 router.put('/evaluationTotal80/:id/:per', controller.updateTotals80);
 router.put('/evaluationTotal20/:id/:per', controller.updateTotals20);
-router.post('/competenciesAppeals',controller.addCompetenciesAppeals);
-router.get('/competenciesAppeals/:id/:per',controller.getCompetencesAppeals);
+router.post('/competenciesAppeals/', controller.addCompetenciesAppeals);
+router.put('/competenciesAppeals/:id/:per', controller.updateAppeals);
+router.get('/competenciesAppeals/:id/:per', controller.getCompetencesAppeals);
 
 
 //router.post('/periods',controller.addPeriod);

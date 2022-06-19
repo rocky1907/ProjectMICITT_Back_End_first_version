@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get('/agreement',controller.getAgreement);
 router.get('/agreement/:id_fun',controller.getAgreementByIdFun);
+router.get('/agreementIdPer/:id_fun/:per',controller.getAgreementByIdFunPer);
 router.post('/agreement',controller.createAgreement);
 router.put('/agreementUpd/:id',controller.updateAgreement);
 router.delete('/agreement/:id',controller.deleteAgreementById);

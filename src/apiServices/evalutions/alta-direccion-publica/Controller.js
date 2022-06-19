@@ -175,7 +175,7 @@ const addOrUpdate = async (req,res)=>{
         }else{
             //update Jefe
             const response = await Promise.all([
-            await pool.query('UPDATE public.competencies_adp set item1_chief = $1 , item2_chief = $2 , item3_chief = $3 , item4_chief = $4 , item5_chief = $5 , item6_chief = $6 , item7_chief = $7 , item8_chief = $8 , item9_chief = $9 , item10_chief = $10 , item11_chief = $11 , item12_chief = $12 , item13_chief = $13 , item14_chief = $14 , item15_chief = $15 , item16_chief = $16 , item17_chief = $17 , item18_chief = $18,item19_chief = $19,item20_chief = $20 where fun_id = $21',[item1_chief, item2_chief,
+            await pool.query('UPDATE public.competencies_adp set item1_chief = $1 , item2_chief = $2 , item3_chief = $3 , item4_chief = $4 , item5_chief = $5 , item6_chief = $6 , item7_chief = $7 , item8_chief = $8 , item9_chief = $9 , item10_chief = $10 , item11_chief = $11 , item12_chief = $12 , item13_chief = $13 , item14_chief = $14 , item15_chief = $15 , item16_chief = $16 , item17_chief = $17 , item18_chief = $18,item19_chief = $19,item20_chief = $20 where fun_id = $21 and periodo = $22',[item1_chief, item2_chief,
                 item3_chief,
                 item4_chief,
                 item5_chief,
@@ -193,9 +193,9 @@ const addOrUpdate = async (req,res)=>{
                 item17_chief,
                 item18_chief,
                 item19_chief,
-                item20_chief,id_fun]),
+                item20_chief,id_fun, periodname]),
 
-            await pool.query('UPDATE public."evaluationIndividualSkills" SET totalindividualskillsboss = $1, percentageindividualskillsboss= $2 WHERE id_fun=$3;',[totalindividualskillsboss,percentageindividualskillsboss,id_fun])
+            await pool.query('UPDATE public."evaluationIndividualSkills" SET totalindividualskillsboss = $1, percentageindividualskillsboss= $2 WHERE id_fun=$3 and periodname = $4;',[totalindividualskillsboss,percentageindividualskillsboss,id_fun, periodname])
             
             ]);
             res.status(200).json(response.rows);
@@ -239,7 +239,7 @@ const addOrUpdate = async (req,res)=>{
         }else{
             //update Funcionario
             const response = await Promise.all([            
-            await pool.query('UPDATE public.competencies_adp set item1_auto = $1 , item2_auto = $2 , item3_auto = $3 , item4_auto = $4 , item5_auto = $5 , item6_auto = $6 , item7_auto = $7 , item8_auto = $8 , item9_auto = $9 , item10_auto = $10 , item11_auto = $11 , item12_auto = $12 , item13_auto = $13 , item14_auto = $14 , item15_auto = $15 , item16_auto = $16 , item17_auto = $17 , item18_auto = $18, item19_auto = $19, item20_auto = $20 where fun_id = $21',[
+            await pool.query('UPDATE public.competencies_adp set item1_auto = $1 , item2_auto = $2 , item3_auto = $3 , item4_auto = $4 , item5_auto = $5 , item6_auto = $6 , item7_auto = $7 , item8_auto = $8 , item9_auto = $9 , item10_auto = $10 , item11_auto = $11 , item12_auto = $12 , item13_auto = $13 , item14_auto = $14 , item15_auto = $15 , item16_auto = $16 , item17_auto = $17 , item18_auto = $18, item19_auto = $19, item20_auto = $20 where fun_id = $21 and periodo = $22',[
                 item1_auto, 
                 item2_auto,
                 item3_auto,
@@ -259,9 +259,9 @@ const addOrUpdate = async (req,res)=>{
                 item17_auto,
                 item18_auto,
                 item19_auto,
-                item20_auto,id_fun]),
+                item20_auto,id_fun, periodname]),
 
-            await pool.query('UPDATE public."evaluationIndividualSkills" SET totalindividualskills = $1, percentageindividualskills= $2 WHERE id_fun=$3;',[totalindividualskills,percentageindividualskills,id_fun])
+            await pool.query('UPDATE public."evaluationIndividualSkills" SET totalindividualskills = $1, percentageindividualskills= $2 WHERE id_fun=$3 and periodname = $4;',[totalindividualskills,percentageindividualskills,id_fun, periodname])
            
             ]);
             res.status(200).json(response.rows);
@@ -561,46 +561,6 @@ const updateTotals20 = async(req,res)=>{
     res.json('Evaluation Updated successfully: '+response.rows);
 };
 
-const updateCompetenciesAppeals = async(req,res)=>{
-    const id = req.params.id;
-    const per = req.param.per;
-    const {item1_sup,
-        item2_sup,
-        item3_sup,
-        item4_sup,
-        item5_sup,
-        item6_sup,
-        item7_sup,
-        item8_sup,
-        item9_sup,
-        item10_sup,
-        item11_sup,
-        item12_sup,
-        item13_sup,
-        item14_sup,
-        item15_sup,
-        item16_sup,
-        item17_sup,
-        item18_sup} = req.body;
-    const response = await pool.query('UPDATE public.competencies_adp set item1_sup = $1 , item2_sup = $2 , item3_sup = $3 , item4_sup = $4 , item5_sup = $5 , item6_sup = $6 , item7_sup = $7 , item8_sup = $8 , item9_sup = $9 , item10_sup = $10 , item11_sup = $11 , item12_sup = $12 , item13_sup = $13 , item14_sup = $14 , item15_sup = $15 , item16_sup = $16 , item17_sup = $17 , item18_sup = $18 where fun_id = $19 and periodo = $20',[item1_sup, item2_sup,
-        item3_sup,
-        item4_sup,
-        item5_sup,
-        item6_sup,
-        item7_sup,
-        item8_sup,
-        item9_sup,
-        item10_sup,
-        item11_sup,
-        item12_sup,
-        item13_sup,
-        item14_sup,
-        item15_sup,
-        item16_sup,
-        item17_sup,
-        item18_sup,id, per]);
-    res.json('Auto Evaluation Competencies Updated successfully: '+response.rows);
-  };
 
   const addCompetenciesAppeals = async (req,res)=>{
     const{id_fun,periodo,
@@ -644,7 +604,7 @@ const updateCompetenciesAppeals = async(req,res)=>{
         item18_sup_sup,
         item19_sup_sup,
         item20_sup_sup
-        }=req.body;
+        } = req.body;
     const response = await pool.query('INSERT INTO public.competencies_appeals('
     +'id_fun, periodo, item1_sup, item2_sup, item3_sup, item4_sup, item5_sup, item6_sup, item7_sup, item8_sup, item9_sup, item10_sup, item11_sup, item12_sup, item13_sup, item14_sup, item15_sup, item16_sup, item17_sup, item18_sup, item19_sup, item20_sup, item1_sup_sup, item2_sup_sup, item3_sup_sup, item4_sup_sup, item5_sup_sup, item6_sup_sup, item7_sup_sup, item8_sup_sup, item9_sup_sup, item10_sup_sup, item11_sup_sup, item12_sup_sup, item13_sup_sup, item14_sup_sup, item15_sup_sup, item16_sup_sup, item17_sup_sup, item18_sup_sup, item19_sup_sup, item20_sup_sup)'
     +'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42);',
@@ -696,9 +656,102 @@ const updateCompetenciesAppeals = async(req,res)=>{
     })
 };
 
+const updateAppeals = async (req,res)=>{
+    const id = req.params.id;
+    const per = req.params.per;
+    const { id_fun, periodo,
+        item1_sup, 
+        item2_sup,
+        item3_sup,
+        item4_sup,
+        item5_sup,
+        item6_sup,
+        item7_sup,
+        item8_sup,
+        item9_sup,
+        item10_sup,
+        item11_sup,
+        item12_sup,
+        item13_sup,
+        item14_sup,
+        item15_sup,
+        item16_sup,
+        item17_sup,
+        item18_sup,
+        item19_sup,
+        item20_sup,
+        item1_sup_sup,
+        item2_sup_sup,
+        item3_sup_sup,
+        item4_sup_sup,
+        item5_sup_sup,
+        item6_sup_sup,
+        item7_sup_sup,
+        item8_sup_sup,
+        item9_sup_sup,
+        item10_sup_sup,
+        item11_sup_sup,
+        item12_sup_sup,
+        item13_sup_sup,
+        item14_sup_sup,
+        item15_sup_sup,
+        item16_sup_sup,
+        item17_sup_sup,
+        item18_sup_sup,
+        item19_sup_sup,
+        item20_sup_sup} = req.body;
+       
+        const response = await pool.query('UPDATE public.competencies_appeals set id_fun = $1, periodo = $2, item1_sup = $3 , item2_sup = $4 , item3_sup = $5 , item4_sup = $6 , item5_sup = $7 , item6_sup = $8 , item7_sup = $9 , item8_sup = $10 , item9_sup = $11 , item10_sup = $12 , item11_sup = $13 , item12_sup = $14 , item13_sup = $15 , item14_sup = $16 , item15_sup = $17 , item16_sup = $18 , item17_sup = $19 , item18_sup = $20, item19_sup = $21,item20_sup = $22, item1_sup_sup = $23 , item2_sup_sup = $24 , item3_sup_sup = $25 , item4_sup_sup = $26 , item5_sup_sup = $27 , item6_sup_sup = $28 , item7_sup_sup = $29 , item8_sup_sup = $30 , item9_sup_sup = $31 , item10_sup_sup = $32 , item11_sup_sup = $33 , item12_sup_sup = $34 , item13_sup_sup = $35 , item14_sup_sup = $36 , item15_sup_sup = $37 , item16_sup_sup = $38 , item17_sup_sup = $39 , item18_sup_sup = $40, item19_sup_sup = $41, item20_sup_sup = $42 where id_fun = $43 and periodo = $44',[
+            id_fun, periodo,
+            item1_sup,
+            item2_sup,
+            item3_sup,
+            item4_sup,
+            item5_sup,
+            item6_sup,
+            item7_sup,
+            item8_sup,
+            item9_sup,
+            item10_sup,
+            item11_sup,
+            item12_sup,
+            item13_sup,
+            item14_sup,
+            item15_sup,
+            item16_sup,
+            item17_sup,
+            item18_sup,
+            item19_sup,
+            item20_sup, 
+            item1_sup_sup,
+            item2_sup_sup,
+            item3_sup_sup,
+            item4_sup_sup,
+            item5_sup_sup,
+            item6_sup_sup,
+            item7_sup_sup,
+            item8_sup_sup,
+            item9_sup_sup,
+            item10_sup_sup,
+            item11_sup_sup,
+            item12_sup_sup,
+            item13_sup_sup,
+            item14_sup_sup,
+            item15_sup_sup,
+            item16_sup_sup,
+            item17_sup_sup,
+            item18_sup_sup,
+            item19_sup_sup,
+            item20_sup_sup,
+            id, per]);
+            
+        res.json('Competencies Updated successfully: '+response.rows);
+    
+};
+
 const getCompetencesAppeals =  async (req,res)=>{
     const id = req.params.id;
-    const per=req.params.per;
+    const per = req.params.per;
     const response = await pool.query('select * from public.competencies_appeals where "id_fun" = $1 and periodo = $2;', [id,per]);
     res.status(200).json(response.rows);
 }
@@ -741,8 +794,9 @@ module.exports = {
     getRubricEvaluationTelecom,
     updateTotals80,
     updateTotals20,
-    addCompetenciesAppeals,
-    getCompetencesAppeals 
+    updateAppeals,
+    getCompetencesAppeals,
+    addCompetenciesAppeals 
 
 }
 
